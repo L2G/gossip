@@ -50,7 +50,7 @@ unless S4tUtils.on_windows?
 
       Dir.chdir(PACKAGE_ROOT + "/examples") do
         with_local_config_file('.watchdog.yml', yaml) do
-          with_environment_vars("RUBYLIB" => "../lib:"+ ENV["RUBYLIB"]) do
+          with_environment_vars("RUBYLIB" => "../lib:"+ (ENV["RUBYLIB"]||".")) do
             stdout = Tempfile.new('stdout')
             stderr = Tempfile.new('stderr')
             actual_string = `ruby watchdog.rb ruby silly-little-test-program.rb 1 2`
