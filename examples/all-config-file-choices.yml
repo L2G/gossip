@@ -1,0 +1,21 @@
+standard-output: false
+jabber: true
+mail: true
+
+mail-to: 
+    - marick@testing.com
+    - other@testing.com
+mail-from: bmarick@mac.com
+mail-server: smtp.mac.com
+mail-port: 587
+mail-from-domain: localhost.localdomain
+mail-account: bmarick
+mail-password: password # must change to run
+mail-authentication: login
+
+jabber-account: watchdog@frex.local/bark
+jabber-to: 
+    - marick@frex.local/iChat
+    - marick@frex.local/iChat
+jabber-password: password
+
