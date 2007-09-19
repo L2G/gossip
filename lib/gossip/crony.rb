@@ -40,7 +40,8 @@ module Gossip
       prog1(@defaults[symbol]) do | value | 
         if value.nil?
           raise StandardError, 
-                "#{symbol.inspect} is nil - likely a typo in a configuration file."
+                "#{symbol.inspect} is nil for #{name} - likely a typo in a configuration file.\n" +
+                @defaults.inspect
         end
       end
     end

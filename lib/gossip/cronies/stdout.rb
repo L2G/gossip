@@ -12,7 +12,7 @@ module Gossip
     def symbol; :standard_output; end
     
     def command_line_description
-      ["-t", "--standard-output", '-s',
+      ["-s", "--standard-output",
        "Control display to terminal (standard output).",
        "Defaults to #{on_by_default?}."]
     end

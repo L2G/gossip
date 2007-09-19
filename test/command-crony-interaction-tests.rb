@@ -50,6 +50,7 @@ class ChoicesTests < Test::Unit::TestCase
                   ], sophie.cronies[0].logged)
   end
   
+  
   class Exhibitionist < Crony
     attr_reader :logged, :user_choices, :symbol
     
@@ -72,9 +73,16 @@ class ChoicesTests < Test::Unit::TestCase
       ['-e', "--exhibitionist", "Defaults to #{on_by_default?}."]
     end
     
-    def add_configuration_choices(builder); log("add_configuration_choices"); end
-    def postprocess_user_choices; log("postprocess_user_choices"); end
-    def hear(*args); log('hear', *args); end
+    def add_configuration_choices(builder)
+      log("add_configuration_choices"); 
+    end
+    def postprocess_user_choices; 
+      log("postprocess_user_choices") 
+    end
+    
+    def hear(*args)
+      log('hear', *args)
+    end
 
     private 
     
