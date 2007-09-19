@@ -15,75 +15,16 @@ include S4tUtils
 require 'gossip'
 include Gossip
 
+# This file will teach you how to make a configuration file that supplies the
+# same default values for all programs you use. (Users can still override the
+# defaults for any given program in its configuration file.)
+require 'gossip/../../examples/config-for-all-examples'
 
-# CHANGE: The following sets those values the program will use unless the 
-# invoker overrides them on either (or both) the command line or YAML
-# configuration file. If you do not intend to use one of the destinations
-# (twitter, say), you can just ignore the values. 
+CONFIG_FILE = ".watchdogrc"           # Override site-wide defaults here.
 
-when_not_TOTALLY_out_of_the_social_scene :jabber do 
-  require 'gossip/cronies/jabber'
-  JabberCrony.new(:default_to => ['listener@example.com', 'other@example.com'],
-                  :default_account => 'watchdog@example.com',
-                  :default_password => 'jabber password')
-end
-
-when_not_TOTALLY_out_of_the_social_scene :mail do
-  require 'gossip/cronies/smtp'
-  SmtpCrony.new(:default_to => ['listener@example.com', 'other@example.com'],
-                :default_from => 'watchdog@example.com',
-                :default_from_domain => 'localhost',
-                :default_smtp_server => 'example.com',
-                :default_smtp_port => 25,
-                :default_smtp_account => 'watchdog',
-                :default_smtp_password => 'mail password',
-                :default_smtp_authentication => 'login')
-end
-
-when_not_TOTALLY_out_of_the_social_scene :campfire do 
-  require 'gossip/cronies/campfire'
-  CampfireCrony.new(:default_login => 'watchdog@example.com',
-                    :default_password => 'campfire password',
-                    :default_subdomain => 'project',
-                    :default_room => 'activity')
-end
-
-when_not_TOTALLY_out_of_the_social_scene :standard_output do 
-  require 'gossip/cronies/stdout'
-  StdoutCrony.new
-end
-
-# CHANGE: These arrays describe the destinations for gossip messages. 
-# Unless defaults are overridden, output will go only to the BFFS
-# The difference between ON_THE_OUTS and TOTAL_OUTSIDERS is that the 
-# invoker can override ON_THE_OUTS. For example, the -j command-line
-# option will cause messages to be sent to Jabber. A TOTAL_OUTSIDER
-# can never be sent a message. This is useful because, for example, 
-# you don't even need to have the twitter gem on your system when 
-# :twitter is a TOTAL_OUTSIDER.
-
-BFFS = [:standard_output]               # By default, gossip with these 
-ON_THE_OUTS = [:mail, :jabber]          # By default, do not gossip with these. 
-TOTAL_OUTSIDERS = [:campfire, :twitter] # These will never ever gossiped with.
-
-CONFIG_FILE = ".watchdog.yml"           # Override defaults here.
-
-
-# CHANGE: The only thing you might need to change below this line is add_sources.
-# Change that if, for example, you want to override defaults using an 
-# XML file instead of a YAML file.
 
 class Watchdog < GossipCommand
-    
-  def add_sources(builder)
-    builder.add_source(PosixCommandLineSource, :usage,
-          "Usage: ruby #{$0} [options] program args...",
-          "Site-wide defaults are noted below.",
-          # TODO: This should check if the path is absolute.
-          "Override them in the '#{CONFIG_FILE}' file in your home folder.")
-    builder.add_source(YamlConfigFileSource, :from_file, CONFIG_FILE)  
-  end
-  
+      
   def postprocess_user_choices
     super
 
