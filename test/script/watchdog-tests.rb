@@ -4,7 +4,7 @@ require 's4t-utils'
 include S4tUtils
 
 require 'tempfile'
-require 'gossip/../../examples/watchdog'
+require 'gossip/../../scripts/watchdog'
 
 class TestWatchdogCommand < Test::Unit::TestCase
   include Gossip
@@ -48,15 +48,17 @@ unless S4tUtils.on_windows?
         standard-output: true
       }
 
-      Dir.chdir(PACKAGE_ROOT + "/examples") do
+      Dir.chdir(PACKAGE_ROOT + "/scripts") do
         with_local_config_file('.watchdog.yml', yaml) do
           with_environment_vars("RUBYLIB" => "../lib:"+ (ENV["RUBYLIB"]||".")) do
             stdout = Tempfile.new('stdout')
             stderr = Tempfile.new('stderr')
-            actual_string = `ruby watchdog.rb ruby silly-little-test-program.rb 1 2`
+            actual_string = `ruby watchdog.rb ruby ../test/util/silly-little-test-program.rb 1 2`
             assert_match(/Program silly-little-test-program.rb finished/, actual_string)
             assert_match(/Duration: /, actual_string)
-            assert_match(/Command: ruby silly-little-test-program.rb 1 2/, actual_string)
+            assert_match(%r{Command: ruby ../test/util/silly-little-test-program.rb 1 2}, actual_string)
+NameError
+
             assert_match(/I mostly write to standard output./, actual_string)
             assert_match(/I also write to standard error./, actual_string)
           end

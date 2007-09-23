@@ -25,11 +25,11 @@ class CommandTests < Test::Unit::TestCase
   def setup
     crony_maker = {
       :bff => proc {
-        require PACKAGE_ROOT + '/test/bff'
+        require PACKAGE_ROOT + '/test/util/bff'
         OneTestCrony.new(:default_format_string => "scandal: %s, details: %s")
       },
       :doghouse => proc {
-        require PACKAGE_ROOT + '/test/doghouse'
+        require PACKAGE_ROOT + '/test/util/doghouse'
         AnotherTestCrony.new(:default_format_string => "%s: %s")
       }
     }
