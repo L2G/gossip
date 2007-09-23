@@ -14,12 +14,9 @@ module Gossip
     def command_line_description
       ["-s", "--standard-output",
        "Control display to terminal (standard output).",
-       "Defaults to #{on_by_default?}."]
+       "Defaults to #{is_bff_by_default?}."]
     end
     
-    def add_configuration_choices(builder)
-    end
-
     def hear(scandal, details)
       all = [scandal, details].join("\n")
       puts all.indent(2)

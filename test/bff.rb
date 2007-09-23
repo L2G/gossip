@@ -17,7 +17,7 @@ module Gossip
     def symbol; :bff; end
 
     def command_line_description
-        ['-b', "--bff", "Defaults to #{on_by_default?}."]
+        ['-b', "--bff", "Defaults to #{is_bff_by_default?}."]
     end
 
     def add_configuration_choices(builder)

@@ -28,8 +28,8 @@ class ChoicesTests < Test::Unit::TestCase
     assert_equal(false, cmd.user_choices[:loser])
     
     # Shorthand for the default value
-    assert_true(@winner.on_by_default?)
-    assert_false(@loser.on_by_default?)
+    assert_true(@winner.is_bff_by_default?)
+    assert_false(@loser.is_bff_by_default?)
 
     # Cronies share user choices with command.
     assert_equal(@winner.user_choices, cmd.user_choices)
@@ -70,7 +70,7 @@ class ChoicesTests < Test::Unit::TestCase
 
     def command_line_description()
       log("command_line_description")
-      ['-e', "--exhibitionist", "Defaults to #{on_by_default?}."]
+      ['-e', "--exhibitionist", "Defaults to #{is_bff_by_default?}."]
     end
     
     def add_configuration_choices(builder)

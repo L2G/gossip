@@ -16,7 +16,7 @@ module Gossip
     def command_line_description
         ['-j', "--jabber",
          "Control IM notification.",
-         "Defaults to #{on_by_default?}."]
+         "Defaults to #{is_bff_by_default?}."]
     end
 
     def add_configuration_choices(builder)

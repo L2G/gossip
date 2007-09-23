@@ -7,7 +7,7 @@
 
 require 'thread'
 
-class Queue
+class Queue # :nodoc:
   def to_a
     result = []
     until empty?
@@ -18,6 +18,8 @@ class Queue
 end
 
 module Gossip
+  # This collects exceptions from several threads and packages them up 
+  # into a single exception.
   class MultiException < StandardError
 
     attr_reader :traces

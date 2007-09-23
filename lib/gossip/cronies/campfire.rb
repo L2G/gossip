@@ -9,6 +9,9 @@ require 'gossip/crony'
 
 
 module Gossip
+  
+  # CampfireCrony adds a notice to a Campfire (http://www.campfirenow.com)
+  # chat room.
   class CampfireCrony < Crony
 
     def name; "campfire"; end
@@ -17,7 +20,7 @@ module Gossip
     def command_line_description
         ["-c", "--campfire",
          "Control display to Campfire chat room.",
-         "Defaults to #{on_by_default?}."]
+         "Defaults to #{is_bff_by_default?}."]
     end
     
     def add_configuration_choices(builder)

@@ -1,4 +1,4 @@
-#! /opt/local/bin/ruby
+#!/usr/bin/env ruby
 #
 #  Created by Brian Marick on 2007-09-15.
 #  Copyright (c) 2007. All rights reserved.
@@ -16,17 +16,19 @@ include Gossip
 # This file will teach you how to make a configuration file that supplies the
 # same default values for all programs you use. (Users can still override the
 # defaults for any given program in its configuration file.)
+
 require 'gossip/../../examples/config-for-all-examples'
+BFFS.delete(:trac) # Don't use this to post svn logs - trac does that better already.
 
 CONFIG_FILE = ".svntellrc"           # Override site-wide defaults here.
 require 'snitch'
 
-pi ARGV, '-----------'
 
 class SvnTell < GossipCommand
   
   def add_choices(builder)    
-    builder.add_choice(:svn_repository) { | command_line |
+    builder.add_choice(:svn_repository,
+                       :default => 'YOU MUST CHANGE THE DEFAULT REPOSITORY') { | command_line |
       command_line.uses_option("--repository REP",
                                "Absolute path of subversion repository.")
     }
@@ -44,16 +46,6 @@ class SvnTell < GossipCommand
                                "Default is #{svnlook_default}.")
     }
     super
-  end
-  
-  def required(choice)
-    raise StandardError, "#{choice} is required." if @user_choices[choice].nil?
-  end
-      
-  def postprocess_user_choices
-    super
-    pp @user_choices
-    [:svn_repository, :svn_revision].each {|e| required(e)}
   end
   
   def execute

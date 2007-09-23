@@ -6,6 +6,8 @@
 require 'net/smtp'
 
 module Gossip
+  
+  # This Crony sends email.
   class SmtpCrony < Crony
 
     def name; 'mail'; end
@@ -14,7 +16,7 @@ module Gossip
     def command_line_description
       ['-m', "--mail",
        "Control mail notification.",
-       "Defaults to #{on_by_default?}."]
+       "Defaults to #{is_bff_by_default?}."]
     end
     
     def add_configuration_choices(builder)

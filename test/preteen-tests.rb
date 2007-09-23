@@ -35,6 +35,12 @@ class PreteenTests < Test::Unit::TestCase
       crony.user_choices = init
     end
   end
+  
+  def test_preteen_fails_nicely_when_given_bad_cronies
+    flunk
+    Preteen.new(:given_wrong_crony_list)
+  end
+  
 
   def test_preteen_tells_bffs
     silent = make(SilentCrony, :silent => true)

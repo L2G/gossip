@@ -8,6 +8,14 @@ require 'gossip/crony'
 
 
 module Gossip
+  # Right now, TracCrony is kind of a hack. It uses trac-admin(1) to 
+  # edit a wiki page. If configured to do so, Trac will add wiki changes
+  # into the Timeline. OK, it's more than "kind of" a hack.
+  #
+  # Note that you must be running a command that uses a Trac crony on
+  # the Trac server itself.
+  #
+  # An alternative would be to use Mechanize. This was easier for now.
   class TracCrony < Crony
 
     def name; "trac"; end
@@ -16,7 +24,7 @@ module Gossip
     def command_line_description
         ["-t", "--trac",
          "Control display to Trac timeline.",
-         "Defaults to #{on_by_default?}."]
+         "Defaults to #{is_bff_by_default?}."]
     end
     
     def add_configuration_choices(builder)
@@ -59,7 +67,15 @@ module Gossip
       env = @user_choices[:trac_environment_path]
       page = @user_choices[:trac_page_name]
       file = @user_choices[:trac_content_file]
-      `#{trac_admin} #{env} wiki import #{page} #{file}`
+      current = File.exist?(file) ? File.read(file) : ""
+      File.open(file, "w") do | io |
+        io.puts(scandal)
+        io.puts(details.gsub(/$/, '[[BR]]'))
+        io.puts('---------------')
+        io.puts current
+      end
+      exec = "#{trac_admin} #{env} wiki import #{page} #{file}"
+      `#{exec}`
     end
 
   end

@@ -1,4 +1,4 @@
-#! /opt/local/bin/ruby
+#!/usr/bin/env ruby
 #
 #  Created by Brian Marick on 2007-09-15.
 #  Copyright (c) 2007. All rights reserved.
@@ -18,6 +18,7 @@ include Gossip
 # This file will teach you how to make a configuration file that supplies the
 # same default values for all programs you use. (Users can still override the
 # defaults for any given program in its configuration file.)
+
 require 'gossip/../../examples/config-for-all-examples'
 
 CONFIG_FILE = ".watchdogrc"           # Override site-wide defaults here.

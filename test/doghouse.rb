@@ -13,7 +13,7 @@ module Gossip
     def symbol; :doghouse; end
 
     def command_line_description
-        ['-d', "--doghouse", "Defaults to #{on_by_default?}."]
+        ['-d', "--doghouse", "Defaults to #{is_bff_by_default?}."]
     end
 
     def add_configuration_choices(builder)
