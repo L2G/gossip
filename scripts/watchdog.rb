@@ -7,7 +7,6 @@ require 'pathname'
 $:.unshift((Pathname.new(__FILE__).parent.parent + 'lib').to_s)
 require 's4t-utils/load-path-auto-adjuster'
 
-require 'extensions/string'
 require 'open3'
 require 's4t-utils'
 include S4tUtils
@@ -15,11 +14,8 @@ include S4tUtils
 require 'gossip'
 include Gossip
 
-# This file will teach you how to make a configuration file that supplies the
-# same default values for all programs you use. (Users can still override the
-# defaults for any given program in its configuration file.)
-
-require 'gossip/../../examples/config-for-all-examples'
+# You may want to replace this. See the installation documentation.
+require 'gossip/site-config'
 
 CONFIG_FILE = ".watchdogrc"           # Override site-wide defaults here.
 
@@ -76,12 +72,13 @@ class Watchdog < GossipCommand
       "Command: #{command_string}",
       "Output:",
       text.indent(2),
-    ].join("\n")
+    ].join($/)
   end
 
 end    
 
 if $0 == __FILE__
+  # You can replace "with" with "without" to get full stack traces.
   with_pleasant_exceptions do
     Watchdog.new(Preteen.new(CronyMaker, BFFS, ON_THE_OUTS)).execute  
   end

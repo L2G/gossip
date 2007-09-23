@@ -13,11 +13,8 @@ include S4tUtils
 require 'gossip'
 include Gossip
 
-# This file will teach you how to make a configuration file that supplies the
-# same default values for all programs you use. (Users can still override the
-# defaults for any given program in its configuration file.)
-
-require 'gossip/../../examples/config-for-all-examples'
+# You may want to replace this. See the installation documentation.
+require 'gossip/site-config'
 BFFS.delete(:trac) # Don't use this to post svn logs - trac does that better already.
 
 CONFIG_FILE = ".svntellrc"           # Override site-wide defaults here.
@@ -58,6 +55,7 @@ class SvnTell < GossipCommand
 end    
 
 if $0 == __FILE__
+  # You can replace "with" with "without" to get full stack traces.
   without_pleasant_exceptions do
     SvnTell.new(Preteen.new(CronyMaker, BFFS, ON_THE_OUTS)).execute  
   end

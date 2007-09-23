@@ -1,3 +1,8 @@
+#!/usr/bin/env ruby
+#
+#  Created by Brian Marick on 2007-09-23.
+#  Copyright (c) 2007. All rights reserved.
+
 # Suppose you want to use many of these example programs. Chances are, you 
 # want each one to use the same site-wide defaults. Change this config file,
 # put it somewhere, and change the examples you use to load it. 
