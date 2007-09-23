@@ -1,7 +1,0 @@
-standard-output: false
-jabber: true
-mail: false
-
-jabber-account: watchdog@frex.local/bark
-jabber-to: marick@mobile-marick.local/iChat
-jabber-password: password

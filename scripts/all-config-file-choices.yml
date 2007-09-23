@@ -1,21 +1,32 @@
-standard-output: false
-jabber: true
-mail: true
+# Turn cronies (destinations) on or off.
+
+standard-output: true
+jabber: false
+mail: false
+campfire: false
+trac: true
+
+# Configurations for each destination. 
+# You can delete or ignore ones you don't plan to use. 
 
 mail-to: 
-    - marick@testing.com
-    - other@testing.com
+    - marick@example.com
+    - dawn@example.com
+
 mail-from: bmarick@mac.com
 mail-server: smtp.mac.com
 mail-port: 587
 mail-from-domain: localhost.localdomain
 mail-account: bmarick
-mail-password: password # must change to run
+mail-password: not-the-real-one
 mail-authentication: login
 
-jabber-account: watchdog@frex.local/bark
+jabber-account: jabber@example.com
+jabber-password: not-the-real-one
 jabber-to: 
-    - marick@frex.local/iChat
-    - marick@frex.local/iChat
-jabber-password: password
-
+    - brianmarick@example.com
+    
+campfire-login: marick@example.com
+campfire-password: not-the-real-one
+campfire-subdomain: example
+campfire-room: room
