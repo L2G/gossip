@@ -4,7 +4,6 @@
 #  Copyright (c) 2007. All rights reserved.
 
 require 'gossip/crony'
-require 'extensions/string'
 
 module Gossip
   class StdoutCrony < Crony
@@ -18,7 +17,7 @@ module Gossip
     end
     
     def hear(scandal, details)
-      all = [scandal, details].join("\n")
+      all = [scandal, details].join($/)
       puts all.indent(2)
     end
   end
