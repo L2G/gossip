@@ -4,6 +4,7 @@
 #  Copyright (c) 2007. All rights reserved.
 
 require 'net/smtp'
+require 'extensions/string'
 
 module Gossip
   
