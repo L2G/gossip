@@ -27,5 +27,12 @@ end
 
 desc "Upload all the web pages"
 task :upload_pages do
-  `scp -r pages/* marick@rubyforge.org:/var/www/gforge-projects/gossip/`
+  stage = ENV['HOME'] + "/tmp/stage"
+  rm_rf stage
+  mkdir_p stage
+  Dir.chdir(stage) do
+    `svn export svn+ssh://marick@rubyforge.org/var/svn/gossip/trunk/pages pages`
+    `scp -r pages/* marick@rubyforge.org:/var/www/gforge-projects/gossip/`
+  end
+  
 end
