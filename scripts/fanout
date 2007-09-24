@@ -5,7 +5,6 @@
 
 require 'pathname'
 $:.unshift((Pathname.new(__FILE__).parent.parent + 'lib').to_s)
-puts $:key => "value", 
 require 's4t-utils/load-path-auto-adjuster'
 
 require 's4t-utils'
@@ -43,7 +42,7 @@ end
 
 if $0 == __FILE__
   # You can replace "with" with "without" to get full stack traces.
-  with_pleasant_exceptions do
+  without_pleasant_exceptions do
     Fanout.new(Preteen.new(CronyMaker, BFFS, ON_THE_OUTS)).execute  
   end
 end

@@ -17,8 +17,8 @@
 # :twitter is a TOTAL_OUTSIDER.
 
 BFFS = [:standard_output] # By default, gossip with these 
-ON_THE_OUTS = [:mail, :jabber, :trac, :campfire, :twitter]  # By default, do not gossip with these. 
-TOTAL_OUTSIDERS = [] # These will never ever gossiped with.
+ON_THE_OUTS = [:mail, :jabber, :campfire, :twitter]  # By default, do not gossip with these. 
+TOTAL_OUTSIDERS = [:trac] # These will never ever gossiped with.
 
 
 # CHANGE: The following sets those values the program will use unless the 
@@ -59,6 +59,12 @@ when_not_TOTALLY_out_of_the_social_scene :trac do
                   :default_environment_path => '/home/user/trac_env1',
                   :default_page_name => 'AnnouncingSuccessfulDeployment',
                   :default_content_file => '/home/user/tmp/deployment')
+end
+
+when_not_TOTALLY_out_of_the_social_scene :twitter do 
+  require 'gossip/cronies/twitter'
+  TwitterCrony.new(:default_login => 'marick@exampler.com',
+                  :default_password => 'twitter password')
 end
 
 

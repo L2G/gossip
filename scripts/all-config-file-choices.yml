@@ -4,11 +4,17 @@ standard-output: true
 jabber: false
 mail: false
 campfire: false
-trac: true
+trac: false
+twitter: false
 
 # Configurations for each destination. 
 # You can delete or ignore ones you don't plan to use. 
 
+jabber-account: jabber@example.com
+jabber-password: not-the-real-one
+jabber-to: 
+    - brianmarick@example.com
+    
 mail-to: 
     - marick@example.com
     - dawn@example.com
@@ -21,12 +27,10 @@ mail-account: bmarick
 mail-password: not-the-real-one
 mail-authentication: login
 
-jabber-account: jabber@example.com
-jabber-password: not-the-real-one
-jabber-to: 
-    - brianmarick@example.com
-    
 campfire-login: marick@example.com
 campfire-password: not-the-real-one
 campfire-subdomain: example
 campfire-room: room
+
+twitter-login: twittername
+twitter-password: some password
