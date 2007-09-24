@@ -17,7 +17,7 @@ include Gossip
 # You may want to replace this. See the installation documentation.
 require 'gossip/site-config'
 
-CONFIG_FILE = ".fanoutrc"           # Override site-wide defaults here.
+SCRIPT_CONFIG_FILE = ".fanoutrc"           # Override site-wide defaults here.
 
 
 class Fanout < GossipCommand

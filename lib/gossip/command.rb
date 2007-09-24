@@ -60,7 +60,8 @@ module Gossip
     def postprocess_user_choices
       if @user_choices[:choices]
         puts "Looking for configuration information in:"
-        puts "  " + File.join(S4tUtils.find_home, CONFIG_FILE)
+        puts "  " + File.join(S4tUtils.find_home, SCRIPT_CONFIG_FILE)
+        puts "  " + File.join(S4tUtils.find_home, GOSSIP_CONFIG_FILE)
         puts "Choices gathered from all sources:"
         puts alphabetical_symbol_hash(@user_choices)
         exit
@@ -71,7 +72,7 @@ module Gossip
         crony.postprocess_user_choices
       end
     end
-
+    
     private
     
     def alphabetical_symbol_hash(hash)

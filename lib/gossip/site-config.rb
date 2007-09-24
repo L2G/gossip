@@ -16,9 +16,9 @@
 # you don't even need to have the twitter gem on your system when 
 # :twitter is a TOTAL_OUTSIDER.
 
-BFFS = [:standard_output]               # By default, gossip with these 
-ON_THE_OUTS = [:mail, :jabber, :trac]          # By default, do not gossip with these. 
-TOTAL_OUTSIDERS = [:campfire, :twitter] # These will never ever gossiped with.
+BFFS = [:standard_output] # By default, gossip with these 
+ON_THE_OUTS = [:mail, :jabber, :trac, :campfire, :twitter]  # By default, do not gossip with these. 
+TOTAL_OUTSIDERS = [] # These will never ever gossiped with.
 
 
 # CHANGE: The following sets those values the program will use unless the 
@@ -73,13 +73,15 @@ end
 # XML file instead of a YAML file.
 
 class GossipCommand
+  GOSSIP_CONFIG_FILE=".gossiprc"
     
   def add_sources(builder)
     builder.add_source(PosixCommandLineSource, :usage,
           "Usage: ruby #{$0} [options] program args...",
           "Site-wide defaults are noted below.",
           # TODO: This should check if the path is absolute.
-          "Override them in the '#{CONFIG_FILE}' file in your home folder.")
-    builder.add_source(YamlConfigFileSource, :from_file, CONFIG_FILE)  
+          "Override them in the '#{SCRIPT_CONFIG_FILE}' file in your home folder.")
+    builder.add_source(YamlConfigFileSource, :from_file, SCRIPT_CONFIG_FILE)
+    builder.add_source(YamlConfigFileSource, :from_file, GOSSIP_CONFIG_FILE)
   end
 end

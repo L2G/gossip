@@ -17,7 +17,7 @@ include Gossip
 require 'gossip/site-config'
 BFFS.delete(:trac) # Don't use this to post svn logs - trac does that better already.
 
-CONFIG_FILE = ".svntellrc"           # Override site-wide defaults here.
+SCRIPT_CONFIG_FILE = ".svntellrc"           # Override site-wide defaults here.
 require 'snitch'
 
 
