@@ -23,7 +23,7 @@ require 'snitch'
 
 class SvnTell < GossipCommand
   
-  def add_choices(builder)    
+  def add_choices_specific_to_script(builder)    
     builder.add_choice(:svn_repository,
                        :default => 'YOU MUST CHANGE THE DEFAULT REPOSITORY') { | command_line |
       command_line.uses_option("--repository REP",
@@ -42,7 +42,6 @@ class SvnTell < GossipCommand
                                "Absolute path of svnlook(1).",
                                "Default is #{svnlook_default}.")
     }
-    super
   end
   
   def execute

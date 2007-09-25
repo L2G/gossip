@@ -27,27 +27,16 @@ module Gossip
     # Determine how the user can override defaults. Must be overridden. 
     def add_sources(builder); subclass_responsibility; end
     
-    # Override this to add choices (like command-line options) to your
-    # command. Don't forget to call super.
     def add_choices(builder)
-      builder.add_choice(:choices,
-                         :default => false,
-                         :type => :boolean) { | command_line |
-        command_line.uses_switch("--choices",
-                                 "Show all configuration choices.")
-      }
+      first_set_are_specific_to_script(builder)
+      all_crony_switches_come_next(builder)
+      crony_specific_switches_are_third(builder)
+      helpful_switches_go_last(builder)
       
-      # Put all the switches at the front of the list.
-      preteen.cronies.each do | crony |
-        crony.add_bff_choice(builder)
-      end
-      
-      preteen.cronies.each do | crony |
-        crony.add_configuration_choices(builder)
-      end
-            
+      # Can go anywhere - doesn't appear in help text.
       add_arglist_choice(builder)
     end
+    
     
     # By default, the command will stuff all arguments into 
     # a choice named :arglist.
@@ -74,6 +63,39 @@ module Gossip
     end
     
     private
+    
+    def first_set_are_specific_to_script(builder)
+      if self.respond_to?(:add_choices_specific_to_script)
+        builder.section_specific_to_script do
+          add_choices_specific_to_script(builder)
+        end
+      end
+    end
+    
+    def all_crony_switches_come_next(builder)
+      builder.section("that determine who hears the gossip") do
+        preteen.cronies.each do | crony |
+          crony.add_bff_choice(builder)
+        end
+      end
+    end
+    
+    def crony_specific_switches_are_third(builder)
+      builder.section("that apply to particular listeners") do
+        preteen.cronies.each do | crony |
+          crony.add_configuration_choices(builder)
+        end
+      end
+    end
+    
+    def helpful_switches_go_last(builder)
+      builder.add_choice(:choices,
+                         :default => false,
+                         :type => :boolean) { | command_line |
+        command_line.uses_switch("--choices",
+                                 "Show all configuration choices.")
+      }
+    end
     
     def alphabetical_symbol_hash(hash)
       key_strings = hash.keys.collect { |k| k.to_s }.sort
