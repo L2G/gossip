@@ -59,6 +59,32 @@ margin:0;
 padding:20px;
 }
 
+#inlineTOC {
+	float: right;
+	list-style: none;
+	background: #EBC851;
+	margin-left: 1em;
+	margin-bottom: 5pt;
+}
+
+#inlineTOC ul {
+	list-style-type: none;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+
+#inlineTOC a {
+	font-weight:700;
+	color:#765;
+	text-decoration:none;
+}
+
+#inlineTOC A:hover {
+	color:#333;
+}
+
+
+
 #container {
 width:750px;
 height:auto;

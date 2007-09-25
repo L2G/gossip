@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Gossip</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml" />
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+	</head>
+	<body>
+	<div id="pageBody">
+		<div id="outer-container">
+			<div id="container">
+			<div id="header">
+				<div id="headerLeft"></div>
+				<div id="headerRight"><h1>Gossip</h1><span class="highlight"><h2>tools for telling people things</h2></span></div>
+			</div>
+			<div id="headerNav">
+					<div id="centerNav">
+					<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="installation.html">Installation</a></li>
+							<li id="current"><a href="starting-to-use.html">Using Bundled Scripts</a></li>
+							<li><a href="new-scripts.html">Writing Scripts</a></li>
+							<li><a href="rdoc">RDoc</a></li>
+							<li><a href="http://rubyforge.org/frs/?group_id=4455">Download</a></li>
+					</ul>
+					</div>
+			</div>
+			<div id="content">
+				<div id="inlineTOC">
+					<ul>
+						<li><a href="starting-to-use.html">Getting started</a></li>
+						<li><a href="scripts-all.html">All scripts</a></li>
+						<ul>
+							<li><a href="scripts-all.html#fanout">fanout: broadcast a message</a></li>
+							<li><a href="scripts-all.html#watchdog">watchdog: report on a script</a></li>
+							<li><a href="scripts-all.html#svntell">svntell: Subversion post-commit</a></li>
+						</ul>
+					</ul>
+				</div>
+				<h2>The different scripts</h2>
+				<p>
+					All of the scripts do two things: they <strong>gather</strong> a <em>scandal</em> and its <em>details</em> from somewhere, then they <strong>send</strong> that information to one or more <em>cronies</em>. Decoding the cutesy metaphor:
+				</p>
+				
+				<ul>
+					<li>
+						<p>
+							A <strong>scandal</strong> is a short piece of text, like the Subject line of an email message.
+						</p>
+					</li>
+					<li>
+						<p>
+							The <strong>details</strong> are, usually, a longer piece of text, like the body of an email message. The distinction is important because some cronies, like Twitter, only get the scandal and not the details.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong>Cronies</strong> represent a destination for the information. Cronies can be sites like <a href="http://twitter.com">Twitter</a> or <a href="http://www.campfirenow.com">Campfire</a>, or they can be programs like email or <a href="http://jabber.org">Jabber</a>.
+						</p>
+					</li>
+				</ul>
+				
+				<p>
+					Here are the different scripts:
+				</p>
+				
+				<ul>
+					<li>
+						<p>
+							<strong><a href="#fanout">fanout</a></strong> sends the scandal and details to the desired cronies.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong><a href="#svntell">svntell</a></strong> is intended to be called from a Subversion post-commit hook. It sends out information about the most recent revision.
+						</p>
+					</li>
+					<li>
+						<p>
+							<strong><a href="#watchdog.html">watchdog</a></strong> is given a command to run. It does so, then reports on the command's output and how long it took.
+						</p>
+					</li>
+				</ul>
+
+				<h2><a name="fanout">fanout</a></h2>
+				<p>
+					<code>fanout</code> gets the scandal from its command-line arguments and the details from standard input. In the following, what you type is shown in bold:
+				</p>
+				<pre>
+	<b>$ ruby fanout this is a scandal
+	Here are some details.</b>
+	  this is a scandal
+	  Here are some details.
+</pre>
+				
+				<p>
+					(The output is indented because that's how the standard output crony prints.) 
+				</p>
+				
+				<p>
+					Often, you want to send only a single line. In that case, the way <code>fanout</code> waits for input is annoying. You can turn that off:
+				</p>
+				
+				
+
+				<h2><a name="watchdog">watchdog</a></h2>
+
+				<h2><a name="svntell">svntell</a></h2>
+
+			</div>
+		</div>
+	</div>
+	
+	</body>
+</html>
+

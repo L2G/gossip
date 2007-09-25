@@ -20,7 +20,7 @@
 					<ul>
 							<li><a href="index.html">Home</a></li>
 							<li><a href="installation.html">Installation</a></li>
-							<li id="current"><a href="using.html">Using Bundled Scripts</a></li>
+							<li id="current"><a href="starting-to-use.html">Using Bundled Scripts</a></li>
 							<li><a href="new-scripts.html">Writing Scripts</a></li>
 							<li><a href="rdoc">RDoc</a></li>
 							<li><a href="http://rubyforge.org/frs/?group_id=4455">Download</a></li>
@@ -28,10 +28,19 @@
 					</div>
 			</div>
 			<div id="content">
+				<div id="inlineTOC">
+					<ul>
+						<li><a href="starting-to-use.html">Getting started</a></li>
+						<li><a href="scripts-all.html">All scripts</a></li>
+						<ul>
+							<li><a href="scripts-all.html#fanout">fanout: broadcast a message</a></li>
+							<li><a href="scripts-all.html#watchdog">watchdog: report on a script</a></li>
+							<li><a href="scripts-all.html#svntell">svntell: Subversion post-commit</a></li>
+						</ul>
+					</ul>
+				</div>
+				
 				<h2>Getting started using bundled scripts</h2>
-				<p>
-					<a href="scripts.html">Next:</a> using each specific script.
-				</p>
 				<p>
 					Unless someone's already done it for you, there's a little work to do before you can use one of the Gossip scripts. You have to tell them where, by default, their messages should go. You <em>can</em>, if you like, give all that information on the command line, but you likely don't want to. Instead, you want to put them in a configuration file.
 				</p>
@@ -139,8 +148,8 @@
 	You can always override the configuration file from the command line.
 </p>
 
-<p>
-	<a href="scripts.html">Next:</a> using each specific script.
+<p style="text-align: center">
+	<a href="scripts-all.html">Next</a>: all scripts.
 </p>
 
 			</div>
