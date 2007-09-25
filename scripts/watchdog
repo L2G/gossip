@@ -17,10 +17,14 @@ include Gossip
 # You may want to replace this. See the installation documentation.
 require 'gossip/site-config'
 
-SCRIPT_CONFIG_FILE = ".watchdogrc"           # Override site-wide defaults here.
-
 class Watchdog < GossipCommand
       
+  def usage
+    "Usage: ruby #{$0} [options] program args..."
+  end
+  
+  def script_config_file; '.watchdogrc'; end
+  
   def postprocess_user_choices
     super
 

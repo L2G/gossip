@@ -16,20 +16,28 @@ include Gossip
 # You may want to replace this. See the installation documentation.
 require 'gossip/site-config'
 
-SCRIPT_CONFIG_FILE = ".fanoutrc"           # Override site-wide defaults here.
-FANOUT_DEFAULT = false
-
 
 class Fanout < GossipCommand
-      
-    def add_choices_specific_to_script(builder)  
-      builder.add_choice(:fanout_details,
-                         :default => FANOUT_DEFAULT) { | command_line |
-        command_line.uses_switch("--details",
-                                 "Collect details from standard input?",
-                                 "Defaults to #{FANOUT_DEFAULT}.")
-      }
-    end
+  
+  def script_config_file; ".fanoutrc"; end
+  
+  def usage
+    ["Usage: ruby #{$0} arg... < details",
+    "The arguments are the scandal to gossip about."]
+  end
+  
+  
+
+  FANOUT_DEFAULT = false  
+  def add_choices_specific_to_script(builder)  
+    builder.add_choice(:fanout_details,
+                       :default => FANOUT_DEFAULT) { | command_line |
+      command_line.uses_switch("--details",
+                               "Collect details from standard input?",
+                               "Defaults to #{FANOUT_DEFAULT}.",
+                               "If false, standard input is not read.")
+    }
+  end
     
       
   def postprocess_user_choices

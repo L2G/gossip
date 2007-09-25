@@ -9,9 +9,12 @@ class CommandTests < Test::Unit::TestCase
   include Gossip
 
   class SomeRandomCommand < GossipCommand    
+    def script_config_file; ".localrc"; end
+    def gossip_config_file; ".globalrc"; end
+    
+    def usage; "Usage: ruby #{$0} [options] program args..."; end
     def add_sources(builder)
-      builder.add_source(PosixCommandLineSource, :usage,
-            "Usage: ruby #{$0} [options] program args...")
+      builder.add_source(PosixCommandLineSource, :usage, *describe_all_but_options)
       builder.add_source(YamlConfigFileSource, :from_file, ".sophie.yml")  
       builder.add_source(XmlConfigFileSource, :from_file, ".sophie.xml")  
     end
@@ -76,6 +79,41 @@ class CommandTests < Test::Unit::TestCase
       }
     }
   end
+  
+  def test_typical_usage_lines
+    with_command_args('--help') do
+      output = capturing_stderr do
+        assert_wants_to_exit do
+          SomeRandomCommand.new(@sophie)
+        end
+      end
+      lines = output.split("\n")
+      assert_equal("Usage: ruby #{$0} [options] program args...", lines[0])
+      assert_match(/Site-wide defaults/, lines[1])
+      assert_match(/Override them in the '.localrc' or '.globalrc' files in your home folder./, lines[2])
+    end
+  end
+  
+  class LongerUsageCommand < SomeRandomCommand
+    def usage; ['line 1', 'line 2']; end
+  end
+    
+  def test_that_usage_lines_can_be_an_array
+    with_command_args('--help') do
+      output = capturing_stderr do
+        assert_wants_to_exit do
+          LongerUsageCommand.new(@sophie).execute
+        end
+      end
+      lines = output.split("\n")
+      assert_equal("line 1", lines[0])
+      assert_equal("line 2", lines[1])
+      assert_match(/Site-wide defaults/, lines[2])
+    end
+      
+  end
+  
+  
   
   
 end

@@ -23,6 +23,16 @@ module Gossip
       self.preteen = preteen
       super()
     end
+    
+    # Text describing the command-line arguments (not the options).
+    # Traditionally looks something like:
+    #    "Usage: ruby #{$0} [options] args..."
+    # Can be a single line or array of lines.
+    # Must be overridden. 
+    def usage; subclass_responsibility; end
+    
+    # Override to name the configuration file specific to this script.
+    def script_config_file; subclass_responsibility; end
 
     # Determine how the user can override defaults. Must be overridden. 
     def add_sources(builder); subclass_responsibility; end
@@ -49,8 +59,8 @@ module Gossip
     def postprocess_user_choices
       if @user_choices[:choices]
         puts "Looking for configuration information in:"
-        puts "  " + File.join(S4tUtils.find_home, SCRIPT_CONFIG_FILE)
-        puts "  " + File.join(S4tUtils.find_home, GOSSIP_CONFIG_FILE)
+        puts "  " + File.join(S4tUtils.find_home, script_config_file)
+        puts "  " + File.join(S4tUtils.find_home, gossip_config_file)
         puts "Choices gathered from all sources:"
         puts alphabetical_symbol_hash(@user_choices)
         exit
@@ -60,6 +70,13 @@ module Gossip
         crony.user_choices = @user_choices
         crony.postprocess_user_choices
       end
+    end
+    
+    def describe_all_but_options
+      [usage,
+      "Site-wide defaults are noted below.",
+      "Override them in the '#{script_config_file}' or '#{gossip_config_file}' files in your home folder."
+      ].flatten
     end
     
     private

@@ -15,7 +15,7 @@ include S4tUtils
 # this particular project. If you installed using the s4t-utils
 # installation tool, they should have already been set correctly. 
 
-MyFileSystemName='watchdog'  # No ".rb" extension.
+MyFileSystemName='gossip'  # No ".rb" extension.
 MyModuleName='Gossip'
 
 
@@ -23,8 +23,8 @@ MyModuleName='Gossip'
 # The following includes all ruby files except for third-party
 # libraries. Change at will.
 
-MyRdocFiles = FileList.new("lib/watchdog.rb",
-                           "lib/watchdog/**/*.rb")
+MyRdocFiles = FileList.new("lib/gossip.rb",
+                           "lib/gossip/**/*.rb")
 
 
 require 's4t-utils/rakefile-common'

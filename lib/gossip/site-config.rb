@@ -17,8 +17,8 @@
 # :twitter is a TOTAL_OUTSIDER.
 
 BFFS = [:standard_output] # By default, gossip with these 
-ON_THE_OUTS = [:mail, :jabber, :campfire, :twitter]  # By default, do not gossip with these. 
-TOTAL_OUTSIDERS = [:trac] # These will never ever gossiped with.
+ON_THE_OUTS = [:mail, :jabber, :campfire, :twitter, :trac]  # By default, do not gossip with these. 
+TOTAL_OUTSIDERS = [] # These will never ever gossiped with.
 
 
 # CHANGE: The following sets those values the program will use unless the 
@@ -79,15 +79,14 @@ end
 # XML file instead of a YAML file.
 
 class GossipCommand
-  GOSSIP_CONFIG_FILE=".gossiprc"
+  
+  # This is the name (in the home directory) of the config file that
+  # applies to all Gossip scripts.
+  def gossip_config_file; ".gossiprc"; end
     
   def add_sources(builder)
-    builder.add_source(PosixCommandLineSource, :usage,
-          "Usage: ruby #{$0} [options] program args...",
-          "Site-wide defaults are noted below.",
-          # TODO: This should check if the path is absolute.
-          "Override them in the '#{SCRIPT_CONFIG_FILE}' or '#{GOSSIP_CONFIG_FILE}' files in your home folder.")
-    builder.add_source(YamlConfigFileSource, :from_file, SCRIPT_CONFIG_FILE)
-    builder.add_source(YamlConfigFileSource, :from_file, GOSSIP_CONFIG_FILE)
+    builder.add_source(PosixCommandLineSource, :usage, *describe_all_but_options)
+    builder.add_source(YamlConfigFileSource, :from_file, script_config_file)
+    builder.add_source(YamlConfigFileSource, :from_file, gossip_config_file)
   end
 end

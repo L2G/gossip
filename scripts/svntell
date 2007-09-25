@@ -17,15 +17,20 @@ include Gossip
 require 'gossip/site-config'
 BFFS.delete(:trac) # Don't use this to post svn logs - trac does that better already.
 
-SCRIPT_CONFIG_FILE = ".svntellrc"           # Override site-wide defaults here.
 require 'snitch'
 
 
 class SvnTell < GossipCommand
+
+  def script_config_file; ".svntellrc"; end
+  
+  def usage
+    "Usage: ruby #{$0} --repository PATH --revision REV"
+  end
+  
   
   def add_choices_specific_to_script(builder)    
-    builder.add_choice(:svn_repository,
-                       :default => 'YOU MUST CHANGE THE DEFAULT REPOSITORY') { | command_line |
+    builder.add_choice(:svn_repository) { | command_line |
       command_line.uses_option("--repository REP",
                                "Absolute path of subversion repository.")
     }

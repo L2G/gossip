@@ -22,7 +22,7 @@ module Gossip
     def symbol; :trac; end
 
     def command_line_description
-        ["-t", "--trac",
+        ["-T", "--trac",
          "Control display to Trac timeline.",
          "Defaults to #{is_bff_by_default?}."]
     end

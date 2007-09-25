@@ -4,7 +4,7 @@ require 's4t-utils'
 include S4tUtils
 
 require 'tempfile'
-require 'gossip/../../scripts/watchdog'
+load "#{PACKAGE_ROOT}/scripts/watchdog"
 
 class TestWatchdogCommand < Test::Unit::TestCase
   include Gossip
@@ -53,7 +53,7 @@ unless S4tUtils.on_windows?
           with_environment_vars("RUBYLIB" => "../lib:"+ (ENV["RUBYLIB"]||".")) do
             stdout = Tempfile.new('stdout')
             stderr = Tempfile.new('stderr')
-            actual_string = `ruby watchdog.rb ruby ../test/util/silly-little-test-program.rb 1 2`
+            actual_string = `ruby watchdog ruby ../test/util/silly-little-test-program.rb 1 2`
             assert_match(/Program silly-little-test-program.rb finished/, actual_string)
             assert_match(/Duration: /, actual_string)
             assert_match(%r{Command: ruby ../test/util/silly-little-test-program.rb 1 2}, actual_string)
