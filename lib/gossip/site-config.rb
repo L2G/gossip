@@ -86,7 +86,7 @@ class GossipCommand
           "Usage: ruby #{$0} [options] program args...",
           "Site-wide defaults are noted below.",
           # TODO: This should check if the path is absolute.
-          "Override them in the '#{SCRIPT_CONFIG_FILE}' file in your home folder.")
+          "Override them in the '#{SCRIPT_CONFIG_FILE}' or '#{GOSSIP_CONFIG_FILE}' files in your home folder.")
     builder.add_source(YamlConfigFileSource, :from_file, SCRIPT_CONFIG_FILE)
     builder.add_source(YamlConfigFileSource, :from_file, GOSSIP_CONFIG_FILE)
   end
