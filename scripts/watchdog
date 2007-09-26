@@ -3,16 +3,14 @@
 #  Created by Brian Marick on 2007-09-15.
 #  Copyright (c) 2007. All rights reserved.
 
-require 'pathname'
-$:.unshift((Pathname.new(__FILE__).parent.parent + 'lib').to_s)
-require 's4t-utils/load-path-auto-adjuster'
-
-require 'open3'
 require 's4t-utils'
 include S4tUtils
+set_script_lib_path(__FILE__)
 
 require 'gossip'
 include Gossip
+
+require 'open3'
 
 # You may want to replace this. See the installation documentation.
 require 'gossip/site-config'
