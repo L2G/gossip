@@ -8,6 +8,11 @@ require 'gossip/crony'
 
 module Gossip
   class AnotherTestCrony < Crony
+    
+    def initialize(*args)
+      super
+      @value = nil # silence warnings
+    end
 
     def name; "doghouse crony"; end
     def symbol; :doghouse; end

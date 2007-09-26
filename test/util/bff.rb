@@ -12,6 +12,11 @@ require 'gossip/crony'
 
 module Gossip
   class OneTestCrony < Crony
+    
+    def initialize(*args)
+      super
+      @value = nil # silence warnings
+    end
 
     def name; "bff"; end
     def symbol; :bff; end

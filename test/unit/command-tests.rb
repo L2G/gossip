@@ -1,7 +1,7 @@
-require "set-standalone-test-paths.rb" unless $started_from_rakefile
 require 'test/unit'
 require 's4t-utils'
 include S4tUtils
+set_test_paths(__FILE__)
 
 require 'gossip'
 

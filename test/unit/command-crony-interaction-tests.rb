@@ -3,10 +3,11 @@
 #  Created by Brian Marick on 2007-09-17.
 #  Copyright (c) 2007. All rights reserved.
 
-require "set-standalone-test-paths.rb" unless $started_from_rakefile
 require 'test/unit'
 require 's4t-utils'
 include S4tUtils
+set_test_paths(__FILE__)
+
 
 require 'gossip'
 

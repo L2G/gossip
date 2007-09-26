@@ -1,9 +1,9 @@
-require "set-standalone-test-paths.rb" unless $started_from_rakefile
 require 'test/unit'
 require 's4t-utils'
 include S4tUtils
+set_test_paths(__FILE__)
 
-require 'tempfile'
+require 'test/script/util'
 load "#{PACKAGE_ROOT}/scripts/watchdog"
 
 class TestWatchdogCommand < Test::Unit::TestCase
@@ -42,27 +42,14 @@ end
 unless S4tUtils.on_windows?
   class TestWatchdogCommandExecution < Test::Unit::TestCase
     def test_command_line_only
-      yaml = %q{
-        mail: false
-        jabber: false
-        standard-output: true
-      }
+      as_script_test('.watchdog.yml') do
+        actual_string = `ruby watchdog ruby ../test/util/silly-little-test-program.rb 1 2`
+        assert_match(/Program silly-little-test-program.rb finished/, actual_string)
+        assert_match(/Duration: /, actual_string)
+        assert_match(%r{Command: ruby ../test/util/silly-little-test-program.rb 1 2}, actual_string)
 
-      Dir.chdir(PACKAGE_ROOT + "/scripts") do
-        with_local_config_file('.watchdog.yml', yaml) do
-          with_environment_vars("RUBYLIB" => "../lib:"+ (ENV["RUBYLIB"]||".")) do
-            stdout = Tempfile.new('stdout')
-            stderr = Tempfile.new('stderr')
-            actual_string = `ruby watchdog ruby ../test/util/silly-little-test-program.rb 1 2`
-            assert_match(/Program silly-little-test-program.rb finished/, actual_string)
-            assert_match(/Duration: /, actual_string)
-            assert_match(%r{Command: ruby ../test/util/silly-little-test-program.rb 1 2}, actual_string)
-NameError
-
-            assert_match(/I mostly write to standard output./, actual_string)
-            assert_match(/I also write to standard error./, actual_string)
-          end
-        end
+        assert_match(/I mostly write to standard output./, actual_string)
+        assert_match(/I also write to standard error./, actual_string)
       end
     end
   end

@@ -83,7 +83,9 @@ class GossipCommand
   # This is the name (in the home directory) of the config file that
   # applies to all Gossip scripts.
   def gossip_config_file; ".gossiprc"; end
-    
+  
+  
+  # Determine how the user can override defaults.
   def add_sources(builder)
     builder.add_source(PosixCommandLineSource, :usage, *describe_all_but_options)
     builder.add_source(YamlConfigFileSource, :from_file, script_config_file)

@@ -34,9 +34,6 @@ module Gossip
     # Override to name the configuration file specific to this script.
     def script_config_file; subclass_responsibility; end
 
-    # Determine how the user can override defaults. Must be overridden. 
-    def add_sources(builder); subclass_responsibility; end
-    
     def add_choices(builder)
       first_set_are_specific_to_script(builder)
       all_crony_switches_come_next(builder)

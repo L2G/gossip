@@ -61,7 +61,7 @@ end
 
 if $0 == __FILE__
   # You can replace "with" with "without" to get full stack traces.
-  without_pleasant_exceptions do
+  with_pleasant_exceptions do
     Fanout.new(Preteen.new(CronyMaker, BFFS, ON_THE_OUTS)).execute  
   end
 end
