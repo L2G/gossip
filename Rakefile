@@ -4,7 +4,7 @@
 #  Copyright (c) 2007. All rights reserved.
 
 require 'hoe'
-require 'lib/gossip/version'
+require 'gossip/version'
 
 
 Hoe.new("gossip", Gossip::Version) do |p|
