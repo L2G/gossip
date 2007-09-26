@@ -37,17 +37,26 @@
 							<li><a href="scripts-all.html#watchdog">watchdog: report on a script</a></li>
 							<li><a href="scripts-all.html#svntell">svntell: Subversion post-commit</a></li>
 						</ul>
+						<li><a href="cronies.html">All cronies</a></li>
+						<ul>
+							<li><a href="cronies.html#campfire">campfire</a></li>
+							<li><a href="cronies.html#jabber">jabber</a></li>
+							<li><a href="cronies.html#mail">mail</a></li>
+							<li><a href="cronies.html#stdout">standard output</a></li>
+							<li><a href="cronies.html#trac">trac</a></li>
+							<li><a href="cronies.html#twitter">twitter</a></li>
+						</ul>
 					</ul>
 				</div>
 				
 				<h2>Getting started using bundled scripts</h2>
 				<p>
-					Unless someone's already done it for you, there's a little work to do before you can use one of the Gossip scripts. You have to tell them where, by default, their messages should go. You <em>can</em>, if you like, give all that information on the command line, but you likely don't want to. Instead, you want to put them in a configuration file.
+					Unless someone's already done it for you, there's a little work to do before you can use one of the Gossip scripts. You have to tell them where, by default, their messages should go. You <em>can</em> give all that information on the command line, but you likely don't want to. Instead, you want to put it in a configuration file.
 				</p>
 				
 				<p>
 					The main Gossip configuration file is named <code>.gossip</code> (note the leading period) in your home directory. The home directory is defined as being whatever <a href="http://www.rubygems.org/read/chapter/12">RubyGems thinks
-</a> is your home directory. Entries in it apply to all Gossip programs. You can override them with a script-specific configuration file. (You don't have to: you can put even script-specific configuration entries in <code>.gossip</code>.)
+</a> it is. Entries in the configuration file apply to all Gossip programs. You can override them with a script-specific configuration file. (You don't have to: you can put even script-specific configuration entries in <code>.gossip</code>.)
 				</p>
 				
 				<p>Here is a sample configuration file, valid as of this writing. You can find the latest version in <code>examples/all-config-file-choices.yml</code> in the distribution. The file is in <a href="http://www.yaml.org/" title="YAML Ain't Markup Language">YAML</a> format.
