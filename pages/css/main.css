@@ -190,7 +190,7 @@ padding-left:32px;
 #headerNav {
 margin-top:5px;
 font-size:93%;
-background:url(bg.gif) #F1Ca3f repeat-x 50% bottom;
+background-color: #F1Ca3f;
 float:left;
 width:100%;
 line-height:normal;
