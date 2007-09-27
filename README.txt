@@ -2,5 +2,5 @@ Gossip is a library that provides a consistent interface to "cronies" like Twitt
 
 There are nicely-formatted {installation instructions}[http://gossip.rubyforge.org/installation.html].
 
-There is also a {description of the main classes}[http://gossip.rubyforge.org/classes.html] to help you understand Gossip, plus instructions for {writing new scripts}[http://gossip.rubyforge.org/new-scripts.html].
+There is also a {description of the main classes}[http://gossip.rubyforge.org/classes.html] to help you understand Gossip, plus instructions for {writing new scripts}[http://gossip.rubyforge.org/writing-new-scripts.html].
 

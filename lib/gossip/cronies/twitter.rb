@@ -42,7 +42,6 @@ module Gossip
     end
 
     def hear(scandal, details)
-      puts 'twittering'
       twit = Twitter::Base.new(@user_choices[:twitter_login], @user_choices[:twitter_password])
       twit.update(scandal)
     end

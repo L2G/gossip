@@ -21,7 +21,7 @@
 							<li><a href="index.html">Home</a></li>
 							<li><a href="installation.html">Installation</a></li>
 							<li id="current"><a href="starting-to-use.html">Using Bundled Scripts</a></li>
-							<li><a href="new-scripts.html">Writing Scripts</a></li>
+							<li><a href="writing-new-scripts.html">Writing Scripts</a></li>
 							<li><a href="rdoc">RDoc</a></li>
 							<li><a href="http://rubyforge.org/frs/?group_id=4455">Download</a></li>
 					</ul>
@@ -29,51 +29,30 @@
 			</div>
 			<div id="content">
 				<div id="inlineTOC">
-					<ul>
-						<li><a href="starting-to-use.html">Getting started</a></li>
-						<li><a href="scripts-all.html">All scripts</a></li>
-						<ul>
-							<li><a href="scripts-all.html#fanout">fanout: broadcast a message</a></li>
-							<li><a href="scripts-all.html#watchdog">watchdog: report on a script</a></li>
-							<li><a href="scripts-all.html#svntell">svntell: Subversion post-commit</a></li>
-						</ul>
-						<li><a href="cronies.html">All cronies</a></li>
-						<ul>
-							<li><a href="cronies.html#campfire">campfire</a></li>
-							<li><a href="cronies.html#jabber">jabber</a></li>
-							<li><a href="cronies.html#mail">mail</a></li>
-							<li><a href="cronies.html#stdout">standard output</a></li>
-							<li><a href="cronies.html#trac">trac</a></li>
-							<li><a href="cronies.html#twitter">twitter</a></li>
-						</ul>
-					</ul>
+				  <ul>
+				    <li><a href="starting-to-use.html">Getting started</a></li>
+				    <ul>
+				      <li><a href="starting-to-use.html#definitions">Three important words</a></li>
+				      <li><a href="starting-to-use.html#config">Your own private configuration</a></li>
+				    </ul>
+				    <li><a href="cronies.html">All cronies</a></li>
+				    <ul>
+				      <li><a href="cronies.html#campfire">campfire</a></li>
+				      <li><a href="cronies.html#jabber">jabber</a></li>
+				      <li><a href="cronies.html#mail">mail</a></li>
+				      <li><a href="cronies.html#stdout">standard output</a></li>
+				      <li><a href="cronies.html#trac">trac</a></li>
+				      <li><a href="cronies.html#twitter">twitter</a></li>
+				    </ul>
+				    <li><a href="scripts.html">All scripts</a></li>
+				    <ul>
+				      <li><a href="scripts.html#fanout">fanout: broadcast a message</a></li>
+				      <li><a href="scripts.html#watchdog">watchdog: report on a script</a></li>
+				      <li><a href="scripts.html#svntell">svntell: Subversion post-commit</a></li>
+				    </ul>
+				  </ul>
 				</div>
 				<h2>The different scripts</h2>
-				<p>
-					All of the scripts do two things: they <strong>gather</strong> a <em>scandal</em> and its <em>details</em> from somewhere, then they <strong>send</strong> that information to one or more <em>cronies</em>. Decoding the cutesy metaphor:
-				</p>
-				
-				<ul>
-					<li>
-						<p>
-							A <strong>scandal</strong> is a short piece of text, like the Subject line of an email message.
-						</p>
-					</li>
-					<li>
-						<p>
-							The <strong>details</strong> are, usually, a longer piece of text, like the body of an email message. The distinction is important because some cronies, like Twitter, only get the scandal and not the details.
-						</p>
-					</li>
-					<li>
-						<p>
-							<strong>Cronies</strong> represent a destination for the information. Cronies can be sites like <a href="http://twitter.com">Twitter</a> or <a href="http://www.campfirenow.com">Campfire</a>, or they can be programs like email or <a href="http://jabber.org">Jabber</a>.
-						</p>
-					</li>
-				</ul>
-				
-				<p>
-					Here are the different scripts:
-				</p>
 				
 				<ul>
 					<li>
@@ -175,7 +154,7 @@
 </pre>
 
 <p style="text-align: center">
-	<a href="scripts-all.html">Next</a>: all cronies.
+	<a href="scripts.html">Next</a>: all cronies.
 </p>
 
 			</div>

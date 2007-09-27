@@ -65,6 +65,7 @@ padding:20px;
 	background: #EBC851;
 	margin-left: 1em;
 	margin-bottom: 5pt;
+/*	include-source: url(inlinetoc.html);  */
 }
 
 #inlineTOC ul {
@@ -168,6 +169,12 @@ img.left {
 float:left;
 margin-right:5px;
 padding:5px;
+}
+
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto
 }
 
 .normal {

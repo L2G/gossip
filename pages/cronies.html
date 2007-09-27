@@ -21,7 +21,7 @@
 							<li><a href="index.html">Home</a></li>
 							<li><a href="installation.html">Installation</a></li>
 							<li id="current"><a href="starting-to-use.html">Using Bundled Scripts</a></li>
-							<li><a href="new-scripts.html">Writing Scripts</a></li>
+							<li><a href="writing-new-scripts.html">Writing Scripts</a></li>
 							<li><a href="rdoc">RDoc</a></li>
 							<li><a href="http://rubyforge.org/frs/?group_id=4455">Download</a></li>
 					</ul>
@@ -29,24 +29,28 @@
 			</div>
 			<div id="content">
 				<div id="inlineTOC">
-					<ul>
-						<li><a href="starting-to-use.html">Getting started</a></li>
-						<li><a href="scripts-all.html">All scripts</a></li>
-						<ul>
-							<li><a href="scripts-all.html#fanout">fanout: broadcast a message</a></li>
-							<li><a href="scripts-all.html#watchdog">watchdog: report on a script</a></li>
-							<li><a href="scripts-all.html#svntell">svntell: Subversion post-commit</a></li>
-						</ul>
-						<li><a href="cronies.html">All cronies</a></li>
-						<ul>
-							<li><a href="cronies.html#campfire">campfire</a></li>
-							<li><a href="cronies.html#jabber">jabber</a></li>
-							<li><a href="cronies.html#mail">mail</a></li>
-							<li><a href="cronies.html#stdout">standard output</a></li>
-							<li><a href="cronies.html#trac">trac</a></li>
-							<li><a href="cronies.html#twitter">twitter</a></li>
-						</ul>
-					</ul>
+				  <ul>
+				    <li><a href="starting-to-use.html">Getting started</a></li>
+				    <ul>
+				      <li><a href="starting-to-use.html#definitions">Three important words</a></li>
+				      <li><a href="starting-to-use.html#config">Your own private configuration</a></li>
+				    </ul>
+				    <li><a href="cronies.html">All cronies</a></li>
+				    <ul>
+				      <li><a href="cronies.html#campfire">campfire</a></li>
+				      <li><a href="cronies.html#jabber">jabber</a></li>
+				      <li><a href="cronies.html#mail">mail</a></li>
+				      <li><a href="cronies.html#stdout">standard output</a></li>
+				      <li><a href="cronies.html#trac">trac</a></li>
+				      <li><a href="cronies.html#twitter">twitter</a></li>
+				    </ul>
+				    <li><a href="scripts.html">All scripts</a></li>
+				    <ul>
+				      <li><a href="scripts.html#fanout">fanout: broadcast a message</a></li>
+				      <li><a href="scripts.html#watchdog">watchdog: report on a script</a></li>
+				      <li><a href="scripts.html#svntell">svntell: Subversion post-commit</a></li>
+				    </ul>
+				  </ul>
 				</div>
 				<h2>The different cronies</h2>
 				
@@ -88,11 +92,160 @@
 				</ul>
 
 				<h2><a name="campfire">Campfire</a></h2>
+				<p>My configuration file turns the <code>campfile</code> crony off. I can turn it on with the <code>-c</code> (or <code>--campfire</code>) option, like this:
+
+<pre>
+   % watchdog -c rake
+</pre>
+
+<p>
+	The result at wevouchfor.campfirenow.com looks like this:
+</p>
+
+<img class="center" src="images/campfire.png" />
+
+
+<p>
+	The scandal is the first line of the message; the details are the rest.
+</p>
+<p>
+	To use the <code>campfire</code> crony, you must have a <a href="http://campfirenow.com/" title="Business chat for groups: Campfire">Campfire</a> account with a chat room set up. Set the following in a configuration file or on the command line:
+</p>
+
+<ul>
+	<li><strong>campfire-login</strong>: Usually an email address.</li>
+	<li><strong>campfire-password</strong></li>
+	<li><strong>campfire-subdomain</strong>: Each campfire group gets its own subdomain. Mine is <a href="http://wevouchfor.campfirenow.com/" title="We Vouch For...">http://wevouchfor.campfirenow.com</a>. So my value for this choice is <code>wevouchfor</code>.</li>
+	<li><strong>campfire-room</strong>: A group can have multiple rooms, each with its own name. The one I've used in this case is <code>wevouchfor activity</code>.</li>
+</ul>
+
 				<h2><a name="jabber">Jabber</a></h2>
+				<p>
+					Here is an example of a continuous build server telling jabber (and perhaps other cronies) about a broken build:
+					</p>
+					
+					<img class="center" src="images/jabber-big.png" />
+
+					<p>
+						The scandal is the first line of the message; the details are the rest.
+					</p>
+					
+					<p>
+						To use the <code>jabber</code> crony, you must have an account on some <a href="http://www.jabber.org/" title="Jabber: Open Instant Messaging and a Whole Lot More, Powered by XMPP">Jabber</a> server. In this example, Jabber messages come from <code>huivoufor@jabber.se</code>.
+					</p>
+					
+
+					<ul>
+						<li><strong>jabber-account</strong>: <code>huivoufor@jabber.se</code>, in this case.</li>
+						<li><strong>jabber-password</strong></li>
+						<li><strong>jabber-to</strong>: One or more accounts to sent to. In YAML, that would look like this: 
+<pre>
+	jabber-to: 
+	    - brianmarick@jabberplace.org
+	    - someone@xmpphost.org
+</pre>
+
+<p>If you only want one account to receive the message, you can abbreviate
+	the YAML to this:
+	</p>
+<pre>
+	jabber-to: brianmarick@jabberplace.org
+</pre>	
+
+<p>One the command line, multiple accounts are separated by commas, like this:
+<pre>
+	 --jabber-to=fred@example.com,brianmarick@example.com 
+</pre>
+
+						</li>
+					</ul>
+					
 				<h2><a name="mail">Mail</a></h2>
+				<p>
+					When mail is sent, the scandal is used as the subject line and the details are put into the body. Here are the choices you have to make:
+				</p>
+				<ul>
+					<li><strong>mail-from</strong>: What's put in the From line of the mail message.</li>
+					<li><strong>mail-to</strong>: The intended recipients.
+<pre>
+    mail-to: 
+    - marick@example.com
+    - person@example.org
+</pre>
+
+						<p>If you only want one account to receive the mail, you can abbreviate
+							the YAML to this:
+							</p>
+<pre>
+    mail-to: marick@example.com
+</pre>	
+
+						<p>One the command line, multiple accounts are separated by commas, like this:
+<pre>
+    --mail-to=marick@example.com,person@example.com 
+</pre>
+						</li>
+					<li><strong>mail-server</strong>: An SMTP server.</li>
+					<li><strong>mail-port</strong></li>
+					<li><strong>mail-from-domain</strong>: The domain the mail claims to be from. Some SMTP servers look at this. The default is localhost.</li>
+<li><strong>mail-account</strong>: An account on the server. Not necessarily the same as <code>mail-from</code>.</li>
+					<li><strong>mail-authentication</strong>: One of <code>plain</code>, <code>login</code>, or <code>cram_md5</code>.</li>
+					<li><strong>mail-password</strong></li>
+				</ul>
+				
 				<h2><a name="stdout">Standard output</a></h2>
+				<p>This crony just prints the scandal and details to the current terminal window. There are no options.</p>
 				<h2><a name="trac">Trac</a></h2>
+				<p>
+					The <code>trac</code> crony puts a notice in the <a href="http://trac.edgewall.org/" title="The Trac Project - Trac">Trac</a> timeline, where it looks like this:
+					</p>
+					
+					<img class="center" src="images/trac-bigger.png" />
+					
+					<p>
+						The mechanism is a hack. To do it right, you'd have to write a plugin and enable XMP/RPC and whatnot. So the implementation is to edit a Wiki page, turning the scandal into a header and putting the details below it. That looks like this:
+					</p>
+					
+					<img class="center" src="images/trac-detail.png" />
+					
+					<p>
+						Then, if the Trac timeline is set to display changes to Wiki pages (configurable per-user on the Timeline page), the changed page's title will appear in the Timeline. You have to click through to see the scandal and details.
+						</p>
+						
+						<p>
+							To further ease the implementation, the editing of the Wiki page is done on the server with the <code>trac-admin</code> command. That means the Gossip script has to run on the server too.
+							</p>
+							
+							<p>It would be swell if someone were to contribute a less hackish implementation.
+								</p>
+								<p>
+									To use this implementation, you have to set the following:
+								</p>
+				<ul>
+					<li><strong>trac-admin-path</strong>: The full path of the <code>trac-admin</code> program.</li>
+					<li><strong>trac-environment-path</strong>: The full path of the Trac environment you're using (such as <code>/home/user/trac_env1</code>).</li>
+					<li><strong>trac-page-name</strong>: The name of the wiki page to change.</li>
+					<li><strong>trac-content-file</strong>: The wiki page is changed by copying this file over its contents. Before the Trac crony does that, it puts the scandal and details at the beginning.</li>
+				</ul>
+				
 				<h2><a name="twitter">Twitter</a></h2>
+				<p>
+					Because <a href="http://twitter.com/home" title="Twitter">Twitter</a> is meant for short messages, only the scandal is sent:
+				</p>
+				<img class="center" src="images/twitter.png" />
+				
+				<p>
+					To use the <code>twitter</code> crony, you need a Twitter account. Messages are sent to that account for others to view. The configuration options are:
+				</p>
+				<ul>
+					<li><strong>twitter-login</strong></li>
+					<li><strong>twitter-password</strong></li>
+				</ul>
+				
+				<p style="text-align: center">
+					<a href="scripts.html">Next</a>: All scripts<br />
+				</p>
+				
 
 			</div>
 		</div>
