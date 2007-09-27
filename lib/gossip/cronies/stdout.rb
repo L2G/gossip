@@ -18,7 +18,7 @@ module Gossip
     
     def hear(scandal, details)
       all = [scandal, details].join($/)
-      puts all.indent(2)
+      puts all.indent_by(2)
     end
   end
 end

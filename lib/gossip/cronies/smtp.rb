@@ -4,7 +4,6 @@
 #  Copyright (c) 2007. All rights reserved.
 
 require 'net/smtp'
-require 'extensions/string'
 
 module Gossip
   
@@ -111,7 +110,7 @@ module Gossip
                 . Subject: [watchdog] #{scandal}
                 .
                 . #{details}
-               ".trim('.')
+               ".without_pretty_margin('.')
         smtp.send_message(mail, from, to)
       }
     end

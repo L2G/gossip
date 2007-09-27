@@ -5,14 +5,13 @@
 
 module Gossip
   
-  # :nodoc: 
   CronyMaker = {}
   
   # Syntactic sugar to associate a symbol naming a Crony subclass 
   # with a block that knows how to load that class and create an object
   # from it. The symbol must be one returned by Crony#symbol.
  
-  def when_not_TOTALLY_out_of_the_social_scene(crony, &crony_maker)
+  def when_not_TOTALLY_out_of_the_social_scene(crony, &crony_maker) 
     CronyMaker[crony] = crony_maker
   end
 

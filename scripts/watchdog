@@ -72,7 +72,7 @@ class Watchdog < GossipCommand
       "Duration: #{duration} seconds.",
       "Command: #{command_string}",
       "Output:",
-      text.indent(2),
+      text.indent_by(2),
     ].join($/)
   end
 
