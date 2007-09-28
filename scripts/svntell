@@ -47,9 +47,17 @@ class SvnTell < GossipCommand
   end
   
   def execute
-    svnlook = Snitch::SvnLook.new(@user_choices[:svn_repository], 
-                                  @user_choices[:svn_revision],
-                                  @user_choices[:svnlook_path])
+    repository = @user_choices[:svn_repository]
+    revision = @user_choices[:svn_revision]
+    svnlook_path = @user_choices[:svnlook_path]
+    
+    user_claims(repository) { "You must choose a repository."}
+    user_claims(revision) { "You must choose a revision."}
+    user_claims(File.exists?(svnlook_path)) { 
+      "svnlook path '#{svnlook_path}' does not exist."
+    }
+    
+    svnlook = Snitch::SvnLook.new(repository, revision, svnlook_path)
     preteen.tell_bffs("Commit by #{svnlook.author}", svnlook.to_s) 
   end
 
