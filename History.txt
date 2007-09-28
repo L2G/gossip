@@ -5,3 +5,5 @@ Version 0.3.0
     library.
   * Can now spread gossip to Campfire. (Idea taken from snitch.rubyforge.org, 	
 	John Nunemaker.)
+  * Can now spread gossip to Trac.
+  * Can now spread gossip to Twitter (credit again to John Nunemaker).
