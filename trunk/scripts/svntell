@@ -1,0 +1,71 @@
+#!/usr/bin/env ruby
+#
+#  Created by Brian Marick on 2007-09-15.
+#  Copyright (c) 2007. All rights reserved.
+
+require 's4t-utils'
+include S4tUtils
+set_script_lib_path(__FILE__)
+
+require 'gossip'
+include Gossip
+
+# You may want to replace this. See the installation documentation.
+require 'gossip/site-config'
+BFFS.delete(:trac) # Don't use this to post svn logs - trac does that better already.
+
+require 'snitch'
+
+
+class SvnTell < GossipCommand
+
+  def script_config_file; ".svntellrc"; end
+  
+  def usage
+    "Usage: ruby #{$0} --repository PATH --revision REV"
+  end
+  
+  
+  def add_choices_specific_to_script(builder)    
+    builder.add_choice(:svn_repository) { | command_line |
+      command_line.uses_option("--repository REP",
+                               "Absolute path of subversion repository.")
+    }
+
+    builder.add_choice(:svn_revision) { | command_line |
+      command_line.uses_option("--revision REV",
+                               "Revision number of interest.")
+    }
+
+    svnlook_default = "/usr/bin/svnlook"
+    builder.add_choice(:svnlook_path,
+                       :default => svnlook_default) { | command_line |
+      command_line.uses_option("--svnlook-path PATH",
+                               "Absolute path of svnlook(1).",
+                               "Default is #{svnlook_default}.")
+    }
+  end
+  
+  def execute
+    repository = @user_choices[:svn_repository]
+    revision = @user_choices[:svn_revision]
+    svnlook_path = @user_choices[:svnlook_path]
+    
+    user_claims(repository) { "You must choose a repository."}
+    user_claims(revision) { "You must choose a revision."}
+    user_claims(File.exists?(svnlook_path)) { 
+      "svnlook path '#{svnlook_path}' does not exist."
+    }
+    
+    svnlook = Snitch::SvnLook.new(repository, revision, svnlook_path)
+    preteen.tell_bffs("Commit by #{svnlook.author}", svnlook.to_s) 
+  end
+
+end    
+
+if $0 == __FILE__
+  # You can replace "with" with "without" to get full stack traces.
+  with_pleasant_exceptions do
+    SvnTell.new(Preteen.new(CronyMaker, BFFS, ON_THE_OUTS)).execute  
+  end
+end

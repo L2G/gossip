@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<title>Gossip</title>
+		<meta http-equiv="Content-Type" content="application/xhtml+xml" />
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<link rel="stylesheet" type="text/css" media="screen" href="css/main.css" />
+	</head>
+	<body>
+	<div id="pageBody">
+		<div id="outer-container">
+			<div id="container">
+			<div id="header">
+				<div id="headerLeft"></div>
+				<div id="headerRight"><h1>Gossip</h1><span class="highlight"><h2>tools for telling people things</h2></span></div>
+			</div>
+			<div id="headerNav">
+					<div id="centerNav">
+					<ul>
+							<li><a href="index.html">Home</a></li>
+							<li id="current"><a href="installation.html">Installation</a></li>
+							<li><a href="starting-to-use.html">Using Bundled Scripts</a></li>
+							<li><a href="writing-new-scripts.html">Writing Scripts</a></li>
+							<li><a href="rdoc">RDoc</a></li>
+							<li><a href="http://rubyforge.org/frs/?group_id=4455">Download</a></li>
+					</ul>
+					</div>
+			</div>
+			<div id="content">
+				<h2>Installation</h2>
+				
+				<ol>
+					<li><code>gem install gossip</code></li>
+					<li>Set up site-wide defaults.</li>
+					<li>Copy whichever of the scripts you want into somewhere in your <code>$PATH</code>.</li>
+				</ol>
+				<h2>Details</h2>
+				<ol>
+					<li>
+						<p>
+							Install the gem in the normal way. (Gossip has dependencies on a number of other gems. You may be annoyed, therefore, when <code>gem</code> installs the Twitter gem even though you aren't going use Twitter. If you're annoyed, <a href="mailto:marick@exampler.com">send me mail</a>, and I'll make a configurable release.)
+						</p>
+					</li>
+					<li>
+						<p>
+							Gossip can send messages to Twitter, email, Jabber, etc. Each of those destinations will require some information (username, password, etc.). All that can be specified on the command line, in configuration files, or it can be set as site-wide defaults. 
+						</p>
+						<p>
+							Gossip comes with a set of site-wide defaults that will certainly be wrong for you. They are in <code>lib/gossip/site-config.rb</code>. You have some choices.
+						</p>
+						
+						<ul>
+							<li>
+								<p>
+									You can leave them alone and make the user specify them in a single config file that applies to all Gossip commands. That makes sense, for example, if you'll be using those commands on a shared server. If everything you do is done under a single user account, putting a <code>.gossiprc</code> file in that account's home directory is easy.
+								</p>
+							</li>
+							<li>
+								<p>
+									You can edit <code>site-config.rb</code> to change the values. Note, however, that you'll lose the values if you install a new version.
+								</p>
+							</li>
+							<li>
+								<p>
+									You can put an improved <code>site-config.rb</code> somewhere else. In that case, you'll have to change the <code>require "gossip/site-config"</code> line in <em>each</em> of the Gossip scripts before installing them. 
+								</p>
+							</li>
+						</ul>
+						<p>To modify <code>site-config.rb</code>, see the instructions within it. The <a href="classes.html">explanation of the system metaphor</a> might help understand the jargon.</p>
+						<p>To make a user configuration file, see <a href="starting-to-use.html">Using Bundled Scripts</a>.</p>
+					</li>
+					<li>
+						<p>
+							Gossip comes with some scripts. They're not automatically installed for fear of conflicts with existing commands. Instead, install the ones you want manually. Here's the current set:
+						</p>
+						<ul>
+							<li><code>fanout</code> sends a message to multiple destinations.</li>
+							<li><code>svntell</code> constructs a message from a Subversion repository and sends it. It's to be called from a subversion post-commit hook.</li>
+							<li><code>watchdog</code> runs a command line, then reports on its output and duration.</li>
+						</ul>
+						<p>
+							See <a href="starting-to-use.html">Using Bundled Scripts</a> for more.
+						</p>
+						<p>Try a script before installing them. A good thing to try is <code>./fanout --help</code>. If you get a complaint that Ruby's not found, you'll need to change the "shebang" line (the first line in the script that now says <code>#!/usr/bin/env ruby</code>) to the absolute path name of your version of Ruby.
+						</p>
+					</li>
+					
+				</ol>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
+
