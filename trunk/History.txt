@@ -1,9 +1,0 @@
-Version 0.3.0
-  * Version from _Everyday Scripting with Ruby_ renamed from Watchdog to 
-    to Gossip and made into a Gem.
-  * Generalized so that watchdog is only one example of the more general
-    library.
-  * Can now spread gossip to Campfire. (Idea taken from snitch.rubyforge.org, 	
-	John Nunemaker.)
-  * Can now spread gossip to Trac.
-  * Can now spread gossip to Twitter (credit again to John Nunemaker).
