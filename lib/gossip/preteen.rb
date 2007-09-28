@@ -22,9 +22,12 @@ module Gossip
     # set will hear gossip; the second will not. The _cronymaker_ is a hash. 
     # It is indexed by crony symbol. The values are blocks that first load
     # the Crony subclass's source, then return a new crony of that class. 
-    def initialize(cronymaker = nil, bff =[], on_the_outs_forever_and_ever_until_tomorrow=[])
+    def initialize(cronymaker = {}, bff =[], on_the_outs_forever_and_ever_until_tomorrow=[])
       @cronies = []
       (bff+on_the_outs_forever_and_ever_until_tomorrow).each do | name |
+        user_claims(cronymaker.has_key?(name)) {
+          "#{name.inspect} is not a known crony."
+        }
         crony = cronymaker[name].call
         crony.is_bff_by_default = bff.include?(name)
         accept(crony)

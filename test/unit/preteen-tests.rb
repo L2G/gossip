@@ -37,8 +37,12 @@ class PreteenTests < Test::Unit::TestCase
   end
   
   def test_preteen_fails_nicely_when_given_bad_cronies
-    flunk
-    Preteen.new(:given_wrong_crony_list)
+    assert_raises_with_matching_message(StandardError, /:wrong_crony is not a known crony/) {
+      Preteen.new({}, [:wrong_crony], [])
+    }
+    assert_raises_with_matching_message(StandardError, /:wrong_crony is not a known crony/) {
+      Preteen.new({}, [], [:wrong_crony])
+    }
   end
   
 
