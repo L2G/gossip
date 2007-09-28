@@ -21,7 +21,7 @@ Hoe.new("gossip", Gossip::Version) do |p|
                   ['twitter', '>= 0.2.0'],
                   ['user-choices', '>= 1.1.4'],
                  ]
-  p.test_globs = "test/**/*-tests.rb"
+  p.test_globs = "test/**/*tests.rb"
   p.rdoc_pattern = %r{README.txt|History.txt|lib/gossip.rb|lib/gossip/.+\.rb}
   p.url = "http://gossip.rubyforge.org"
   p.remote_rdoc_dir = 'rdoc'
@@ -37,4 +37,15 @@ task :upload_pages do
     `scp -r pages/* marick@rubyforge.org:/var/www/gforge-projects/gossip/`
   end
   
+end
+
+require 's4t-utils/rake-task-helpers'
+desc "Run fast tests."
+task 'fast' do
+  S4tUtils.run_particular_tests('test', 'fast')
+end
+
+desc "Run slow tests."
+task 'slow' do
+  S4tUtils.run_particular_tests('test', 'slow')
 end
