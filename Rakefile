@@ -4,12 +4,15 @@
 #  Copyright (c) 2007. All rights reserved.
 
 require 'hoe'
-require 'lib/gossip/version'
+
+Dir.chdir('lib') do
+  # Hack: This prevents requires of the same file looking 
+  # different in tests and causing annoying warnings.
+  require 'gossip/version'
+end
 
 PROJECT='gossip'
 THIS_RELEASE=Gossip::Version
-ROOT = "svn+ssh://marick@rubyforge.org/var/svn/#{PROJECT}"
-EXPORTS="#{ENV['HOME']}/tmp/exports"
 
 
 Hoe.new(PROJECT, THIS_RELEASE) do |p|
@@ -33,49 +36,102 @@ Hoe.new(PROJECT, THIS_RELEASE) do |p|
 end
 
 require 's4t-utils/rake-task-helpers'
-desc "Run fast tests."
-task 'fast' do
-  S4tUtils.run_particular_tests('test', 'fast')
-end
+require 's4t-utils/os'
 
-desc "Run slow tests."
-task 'slow' do
-  S4tUtils.run_particular_tests('test', 'slow')
-end
-
-desc "Upload all the web pages"
-task 'upload_pages' => ['export'] do
-  Dir.chdir("#{EXPORTS}/#{PROJECT}") do
-    exec = "scp -r pages/* marick@rubyforge.org:/var/www/gforge-projects/#{PROJECT}/"
-    puts exec
-    system(exec)
+def assert_in(dir, taskname)
+  unless Dir.pwd == dir
+    puts "Run task '#{taskname}' from directory '#{dir}'."
+    exit 1
   end
 end
 
-desc "Tag release with current version."
-task 'tag_release' do
-  from = "#{ROOT}/trunk"
-  to = "#{ROOT}/tags/rel-#{THIS_RELEASE}"
-  message = "Release #{THIS_RELEASE}"
-  exec = "svn copy -m '#{message}' #{from} #{to}"
-  puts exec
-  system(exec)
+def confirmed_step(name, required_dir = nil)
+  assert_in(required_dir, name) if required_dir
+  STDOUT.puts "** #{name} **"
+  STDOUT.puts `rake #{name}`
+  STDOUT.print 'OK? > '
+  exit if STDIN.readline =~ /[nN]/
 end
 
-desc "Export to ~/tmp/exports/#{PROJECT}"
-task 'export' do 
-  Dir.chdir(EXPORTS) do
-    rm_rf PROJECT
-    exec = "svn export #{ROOT}/trunk #{PROJECT}"
-    puts exec
-    system exec
+class HoeLike
+  
+  def pull(key)
+    @keys[key] || raise("Missing key #{key.inspect}")
   end
+  
+  def initialize(keys)
+    @keys = keys
+    project = pull(:project)
+    this_release = pull(:this_release)
+    login = pull(:login)
+    web_site_root = pull(:web_site_root)
+    export_root = pull(:export_root)
+    
+    root = "svn+ssh://#{login}/var/svn/#{project}"
+    project_exports = "#{export_root}/#{project}"
+    
+    desc "Run fast tests."
+    task 'fast' do
+      S4tUtils.run_particular_tests('test', 'fast')
+    end
+    
+    desc "Run slow tests."
+    task 'slow' do
+      S4tUtils.run_particular_tests('test', 'slow')
+    end
+    
+    desc "Upload all the web pages"
+    task 'upload_pages' do | task |
+      exec = "scp -r #{web_site_root}/* #{login}:/var/www/gforge-projects/#{project}/"
+      puts exec
+      system(exec)
+    end
+
+    desc "Tag release with current version."
+    task 'tag_release' do
+      from = "#{root}/trunk"
+      to = "#{root}/tags/rel-#{this_release}"
+      message = "Release #{this_release}"
+      exec = "svn copy -m '#{message}' #{from} #{to}"
+      puts exec
+      system(exec)
+    end
+    
+    desc "Export to #{project_exports}"
+    task 'export' do 
+      Dir.chdir(export_root) do
+        rm_rf project
+        exec = "svn export #{root}/trunk #{project}"
+        puts exec
+        system exec
+      end
+    end
+    
+
+    desc "Complete release of everything - asks for confirmation after steps"
+    # Because in Ruby 1.8.6, Rake doesn't notice subtask failures, so it
+    # won't stop for us.
+    task 'release_everything' do  
+      confirmed_step 'check_manifest'
+      confirmed_step 'test'
+      confirmed_step 'export'
+      Dir.chdir(project_exports) do
+        puts "Working in #{Dir.pwd}"
+        confirmed_step 'upload_pages', project_exports
+        confirmed_step 'publish_docs', project_exports
+        ENV['VERSION'] = this_release
+        confirmed_step 'release', project_exports
+      end
+      confirmed_step 'tag_release'
+    end
+
+  end
+
 end
 
-desc "Complete release of everything"
-task 'release_everything' => ['test', 'check_manifest', 'export', 'tag_release']
-  Dir.chdir("#{EXPORTS}/#{PROJECT}") do
-    `rake release`
-    `rake upload_pages`
-    `rake publish_docs`
-  end
+HoeLike.new(:project => PROJECT, :this_release => THIS_RELEASE,
+            :login => "marick@rubyforge.org",
+            :web_site_root => 'pages', 
+            :export_root => "#{S4tUtils.find_home}/tmp/exports")
+
+
