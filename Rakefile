@@ -45,8 +45,7 @@ def assert_in(dir, taskname)
   end
 end
 
-def confirmed_step(name, required_dir = nil)
-  assert_in(required_dir, name) if required_dir
+def confirmed_step(name)
   STDOUT.puts "** #{name} **"
   STDOUT.puts `rake #{name}`
   STDOUT.print 'OK? > '
@@ -80,11 +79,21 @@ class HoeLike
       S4tUtils.run_particular_tests('test', 'slow')
     end
     
-    desc "Upload all the web pages"
+    desc "Upload all the web pages (as part of release)"
     task 'upload_pages' do | task |
+      assert_in_dir(project_exports, task.name)
       exec = "scp -r #{web_site_root}/* #{login}:/var/www/gforge-projects/#{project}/"
       puts exec
       system(exec)
+    end
+    
+    desc "Upload all the web pages (not as part of release)"
+    task 'export_and_upload_pages' => 'export' do | task |
+      Dir.chdir(project_exports) do
+        exec = "scp -r #{web_site_root}/* #{login}:/var/www/gforge-projects/#{project}/"
+        puts exec
+        system(exec)
+      end
     end
 
     desc "Tag release with current version."
@@ -113,14 +122,14 @@ class HoeLike
     # won't stop for us.
     task 'release_everything' do  
       confirmed_step 'check_manifest'
-      confirmed_step 'test'
       confirmed_step 'export'
       Dir.chdir(project_exports) do
         puts "Working in #{Dir.pwd}"
-        confirmed_step 'upload_pages', project_exports
-        confirmed_step 'publish_docs', project_exports
+        confirmed_step 'test'
+        confirmed_step 'upload_pages'
+        confirmed_step 'publish_docs'
         ENV['VERSION'] = this_release
-        confirmed_step 'release', project_exports
+        confirmed_step 'release'
       end
       confirmed_step 'tag_release'
     end

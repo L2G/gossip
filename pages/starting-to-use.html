@@ -125,13 +125,19 @@ The main Gossip configuration file is named <code>.gossip</code> (note the leadi
 
 	twitter-login: twittername
 	twitter-password: some password
+	
+	trac-admin-path: /usr/local/bin/trac-admin
+	trac-environment-path: /home/user/trac_env1
+	trac-page-name: AnnouncingSuccessfulDeployment
+	trac-content-file: /home/user/tmp/deployment.log
+	
 				</pre>
 
 <p>
 With luck, the names alone are enough for you to know what values to use. If not, <a href="cronies.html">look here</a> or ask for command-line help:
 </p>
 <pre>
-	$ scripts/fanout --help
+	$ ruby scripts/fanout --help
 	Usage: ruby scripts/fanout [options] program args...
 	Site-wide defaults are noted below.
 	Override them in the '.fanoutrc' or '.gossiprc' files in your home folder.
@@ -161,7 +167,7 @@ With luck, the names alone are enough for you to know what values to use. If not
 
 <p>If you make a typo in the configuration file, Gossip will not complain. So it's useful to use the <code>--choices</code> argument to see that it's gotten the values you want:</p>
 <pre>
-	$ scripts/fanout --choices
+	$ ruby scripts/fanout --choices
 	Looking for configuration information in:
 	  /Users/marick/.fanoutrc
 	  /Users/marick/.gossiprc

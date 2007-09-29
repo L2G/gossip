@@ -50,7 +50,7 @@ module Gossip
     
     def hear(scandal, details)
       my_jid = JID.new(@user_choices[:jabber_account])
-      cl = Client.new(my_jid, false)
+      cl = quiet_client(my_jid)
       cl.connect
       cl.auth(@user_choices[:jabber_password])
       details = [scandal, details].join("\n")
@@ -60,6 +60,16 @@ module Gossip
         cl.send(m)
       end
       cl.close
+    end
+    
+    # Current XMPP4R (0.3.1) prints warning message that's not important.
+    def quiet_client(my_jid)
+      cl = nil
+      msg = capturing_stderr do
+        cl = Client.new(my_jid, false)
+      end
+      $stderr.puts msg unless msg =~ /Non-threaded mode is currently broken/
+      cl
     end
 
   end

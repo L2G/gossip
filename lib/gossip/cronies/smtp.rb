@@ -110,7 +110,7 @@ module Gossip
                 . Subject: [watchdog] #{scandal}
                 .
                 . #{details}
-               ".without_pretty_margin('.')
+               ".without_pretty_indentation('.')
         smtp.send_message(mail, from, to)
       }
     end

@@ -1,3 +1,9 @@
+Version 0.3.1
+  * Out of sync with name change in s4t-utils.
+  * Squish warning message from xmpp4r.
+  * Small updates to documentation.
+  * More improvements to Rakefile
+
 Version 0.3.0
   * Version from _Everyday Scripting with Ruby_ renamed from Watchdog to 
     to Gossip and made into a Gem.
