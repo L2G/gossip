@@ -81,7 +81,7 @@ class HoeLike
     
     desc "Upload all the web pages (as part of release)"
     task 'upload_pages' do | task |
-      assert_in_dir(project_exports, task.name)
+      assert_in(project_exports, task.name)
       exec = "scp -r #{web_site_root}/* #{login}:/var/www/gforge-projects/#{project}/"
       puts exec
       system(exec)
