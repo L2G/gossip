@@ -1,3 +1,11 @@
+Version 0.3.2
+  * The SMTP crony identified mail as coming from "[watchdog] ",
+    which is not right now that there are other scripts. For the
+    moment, I choose not to add something like a :mail_header_prefix
+    choice - is there anything special about mail that makes such
+    a thing appropriate there when something like twitter doesn't have
+    it? Do I want to add it everywhere?
+
 Version 0.3.1
   * Out of sync with name change in s4t-utils.
   * Squish warning message from xmpp4r.

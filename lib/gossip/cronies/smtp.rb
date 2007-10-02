@@ -107,7 +107,7 @@ module Gossip
         mail = "
                 . From: #{from}
                 . To: #{to.join(', ')}
-                . Subject: [watchdog] #{scandal}
+                . Subject: #{scandal}
                 .
                 . #{details}
                ".without_pretty_indentation('.')

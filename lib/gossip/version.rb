@@ -4,5 +4,5 @@
 #  Copyright (c) 2007. All rights reserved.
 
 module Gossip
-  Version = '0.3.1'
+  Version = '0.3.2'
 end
