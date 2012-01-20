@@ -152,6 +152,12 @@ display:block;
 padding:0.5em 0.5em 0.5em 1em;
 }
 
+blockquote.index {
+font-style:italic;
+margin:0;
+background:white;
+}
+
 #footer {
 color:gray;
 font-size:10px;
