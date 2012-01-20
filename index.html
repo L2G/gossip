@@ -4,16 +4,19 @@ title: Gossip
 ---
 <p><img alt="A Jabber Message" src="images/jabber.png" class=
 "right" />Gossip is a Ruby library for sending messages to people
-through various channels. It was originally written to help two
-people on a distributed project keep in sync. The picture on the
-right shows the arrival of a <a href="http://www.jabber.org/" title=
-"Jabber: Open Instant Messaging and a Whole Lot More, Powered by XMPP">
-Jabber</a> message alerting me to a checkin by my codeveloper an
-ocean away. Below, there's a picture showing that our deployment
-script adds a notification to our <a href="http://trac.edgewall.org/"
-title="The Trac Project - Trac">Trac</a> project timeline. Since the
-timeline has an RSS feed, at the beginning of the day, I can easily
-see what happened in France while I was sleeping.</p>
+through various channels. It was originally written by Brian Marick
+to help himself and another developer on a distributed project keep in
+sync:</p>
+
+<blockquote><p>The picture on the right shows the arrival of a <a
+href="http://www.jabber.org/" title= "Jabber: Open Instant Messaging and a
+Whole Lot More, Powered by XMPP"> Jabber</a> message alerting me to a checkin
+by my codeveloper an ocean away. Below, there's a picture showing that our
+deployment script adds a notification to our <a
+href="http://trac.edgewall.org/" title="The Trac Project - Trac">Trac</a>
+project timeline. Since the timeline has an RSS feed, at the beginning of the
+day, I can easily see what happened in France while I was
+sleeping.</p></blockquote>
 
 <p>In addition to <strong>Trac</strong> and <strong>Jabber</strong>,
 Gossip currently can talk to <a href="http://campfirenow.com/" title=
@@ -29,10 +32,10 @@ message about a <strong><a href="http://subversion.tigris.org/"
 title="subversion.tigris.org">Subversion</a> commit</strong>. The
 third watches a command run, then broadcasts <strong>command output
 and how long it took</strong>. (This last is a derivative of the
-"watchdog" program from my <i><a href=
+"watchdog" program from Mr. Marick's <cite><a href=
 "http://www.pragmaticprogrammer.com/titles/bmsft/" title=
 "Everyday Scripting with Ruby">Everyday Scripting with
-Ruby</a></i>.)</p>
+Ruby</a></cite>.)</p>
 
 <p>Gossip scripts are, out of the box, highly configurable. Each user
 (real or virtual) can override defaults with configuration files
