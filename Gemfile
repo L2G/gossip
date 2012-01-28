@@ -1,5 +1,6 @@
 source 'http://rubygems.org/'
 gem 'rake'
+gem 'rdoc'
 gem 'hoe'
 gem 's4t-utils', '~> 1.0.4'
 gem 'xmpp4r', '~> 0.3.1'
