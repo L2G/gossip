@@ -15,8 +15,9 @@ PROJECT='gossip'
 THIS_RELEASE=Gossip::Version
 
 
-Hoe.new(PROJECT, THIS_RELEASE) do |p|
+Hoe.spec(PROJECT) do |p|
   p.rubyforge_name = PROJECT
+  p.version = THIS_RELEASE
   p.changes = "See History.txt"
   p.author = "Brian Marick"
   p.description = "Library to broadcast messages to multiple destinations + scripts that use it"
@@ -29,16 +30,9 @@ Hoe.new(PROJECT, THIS_RELEASE) do |p|
                   ['twitter', '>= 0.2.0'],
                   ['user-choices', '>= 1.1.4'],
                  ]
-  p.test_globs = "test/**/*tests.rb"
-  p.rdoc_pattern = %r{README.txt|History.txt|lib/gossip.rb|lib/gossip/.+\.rb}
+  p.test_globs = ["test/**/*tests.rb"]
+  p.readme_file = "README.txt"
+  p.history_file = "History.txt"
   p.url = "http://gossip.rubyforge.org"
   p.remote_rdoc_dir = 'rdoc'
 end
-
-require 's4t-utils/hoelike'
-HoeLike.new(:project => PROJECT, :this_release => THIS_RELEASE,
-            :login => "marick@rubyforge.org",
-            :web_site_root => 'pages', 
-            :export_root => "#{S4tUtils.find_home}/tmp/exports")
-
-
