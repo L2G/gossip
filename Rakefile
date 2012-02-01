@@ -3,6 +3,7 @@
 #  Created by Brian Marick on 2007-07-03.
 #  Copyright (c) 2007. All rights reserved.
 
+require 'bundler/setup'
 require 'hoe'
 
 Dir.chdir('lib') do

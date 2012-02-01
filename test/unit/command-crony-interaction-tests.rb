@@ -3,6 +3,7 @@
 #  Created by Brian Marick on 2007-09-17.
 #  Copyright (c) 2007. All rights reserved.
 
+require 'bundler/setup'
 require 'test/unit'
 require 's4t-utils'
 include S4tUtils

@@ -4,6 +4,7 @@
 #  Copyright (c) 2007. All rights reserved.
 
 
+require 'bundler/setup'
 require 'tinder'
 require 'gossip/crony'
 

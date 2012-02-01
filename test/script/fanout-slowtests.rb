@@ -3,6 +3,7 @@
 #  Created by Brian Marick on 2007-09-25.
 #  Copyright (c) 2007. All rights reserved.
 
+require 'bundler/setup'
 require 'test/unit'
 require 's4t-utils'
 S4tUtils.set_test_paths(__FILE__)

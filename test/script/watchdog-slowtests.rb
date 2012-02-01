@@ -1,3 +1,4 @@
+require 'bundler/setup'
 require 'test/unit'
 require 's4t-utils'
 include S4tUtils
