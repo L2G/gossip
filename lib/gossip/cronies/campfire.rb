@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 #
 #  Created by Brian Marick on 2007-09-16.
-#  Copyright (c) 2007. All rights reserved.
+#  Copyright (c) 2007 Brian Marick.
+#  Copyright (c) 2012 Lawrence Leonard Gilbert.
+#  All rights reserved.
 
 
 require 'bundler/setup'
@@ -61,9 +63,11 @@ module Gossip
     end
 
     def hear(scandal, details)
-      connection = Tinder::Campfire.new(@user_choices[:campfire_subdomain])
-      connection.login(@user_choices[:campfire_login], @user_choices[:campfire_password])
-      raise StandardError, "Login to Campfire failed." unless connection.logged_in?
+      connection = Tinder::Campfire.new(
+        @user_choices[:campfire_subdomain],
+        :username => @user_choices[:campfire_login],
+        :password => @user_choices[:campfire_password]
+        )
       room = connection.find_room_by_name(@user_choices[:campfire_room])
       room.paste([scandal, details].join("\n"))
       connection.logout
