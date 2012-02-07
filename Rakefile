@@ -1,16 +1,16 @@
 #!/usr/bin/env ruby
 #
 #  Created by Brian Marick on 2007-07-03.
-#  Copyright (c) 2007. All rights reserved.
+#  Copyright (c) 2007 Brian Marick. All rights reserved.
+#  Copyright (c) 2012 Lawrence Leonard Gilbert. All rights reserved.
 
 require 'bundler/setup'
 require 'hoe'
 
-Dir.chdir('lib') do
-  # Hack: This prevents requires of the same file looking 
-  # different in tests and causing annoying warnings.
-  require 'gossip/version'
-end
+# Hack: This prevents requires of the same file looking 
+# different in tests and causing annoying warnings.
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__)), 'lib')
+require 'gossip/version'
 
 PROJECT='gossip'
 THIS_RELEASE=Gossip::Version
