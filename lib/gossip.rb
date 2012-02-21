@@ -3,7 +3,6 @@
 #  Created by Brian Marick on 2007-09-15.
 #  Copyright (c) 2007. All rights reserved.
 
-require 'bundler/setup'
 require 's4t-utils'
 require 'active_support'  # because it includes its own copy of a gem
                           # that user-choices would otherwise include.
