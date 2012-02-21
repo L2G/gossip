@@ -24,8 +24,7 @@ Hoe.spec(PROJECT) do |p|
   p.description = "Library to broadcast messages to multiple destinations + scripts that use it"
   p.summary = p.description
   p.email = "marick@exampler.com"
-  p.extra_deps = [['s4t-utils', '>= 1.0.4'],
-                  ['xmpp4r', '>= 0.3.1'],
+  p.extra_deps = [['xmpp4r', '>= 0.3.1'],
                   ['tinder', '>= 0.1.4'],
                   ['snitch', '>= 0.1.1'],
                   ['twitter', '>= 0.2.0'],
