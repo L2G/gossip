@@ -3,7 +3,6 @@
 #  Created by Brian Marick on 2007-09-24.
 #  Copyright (c) 2007. All rights reserved.
 
-require 'bundler/setup'
 require 'twitter'
 require 'gossip/crony'
 
