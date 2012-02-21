@@ -20,10 +20,10 @@ Hoe.spec(PROJECT) do |p|
   p.rubyforge_name = PROJECT
   p.version = THIS_RELEASE
   p.changes = "See History.txt"
-  p.author = "Brian Marick"
+  p.author = ["Brian Marick", "Larry Gilbert"]
   p.description = "Library to broadcast messages to multiple destinations + scripts that use it"
   p.summary = p.description
-  p.email = "marick@exampler.com"
+  p.email = ["marick@exampler.com", "larry@l2g.to"]
   p.extra_deps = [['s4t-utils', '>= 1.0.4'],
                   ['xmpp4r', '>= 0.3.1'],
                   ['tinder', '>= 0.1.4'],
