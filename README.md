@@ -1,8 +1,4 @@
-[![Build Status](https://secure.travis-ci.org/L2G/gossip.png)](http://travis-ci.org/L2G/gossip)
-
-This is a fork of the original Gossip project, which lives on RubyForge. There is not yet any good reason to use this version over the original, as it is still being overhauled.
-
---------
+[![Build Status](https://secure.travis-ci.org/L2G/gossip.png?branch=master)](http://travis-ci.org/L2G/gossip)
 
 Gossip is a library that provides a consistent interface to "cronies" like Twitter, Campfire, email, and Jabber. It comes with scripts that use that library to do useful things. There is a [more detailed description](http://l2g.github.com/gossip).
 
