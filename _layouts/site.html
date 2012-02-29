@@ -42,6 +42,7 @@
         </div>
 
         <div id="content">
+{% if page.include_toc %}{% include toc.html %}{% endif %}
 {{ page.content }}
         </div>
 
