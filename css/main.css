@@ -132,7 +132,6 @@ font-size:14px;
 text-decoration:none;
 width:750px;
 height:auto;
-border-bottom:1px solid #eaeaea;
 line-height:160%;
 }
 
@@ -163,6 +162,8 @@ color:gray;
 font-size:10px;
 text-decoration:none;
 padding-top:5px;
+border-top:1px solid #eaeaea;
+clear:both;
 }
 
 img.right {
