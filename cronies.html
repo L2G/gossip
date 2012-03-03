@@ -2,6 +2,8 @@
 layout: site
 title: Cronies
 include_toc: true
+validation_rev: 2
+validated: true
 ---
 <h2>The different cronies</h2>
 
@@ -25,7 +27,9 @@ Here are the capsule descriptions:
 
 <h2><a name="campfire">Campfire</a></h2>
 
-<p>My configuration file turns the <code>campfile</code> crony off. I can turn it on with the <code>-c</code> (or <code>--campfire</code>) option, like this:
+<p>My configuration file turns the <code>campfile</code> crony off. I can turn
+it on with the <code>-c</code> (or <code>--campfire</code>) option, like
+this:</p>
 
 <pre>
    % watchdog -c rake
@@ -35,7 +39,8 @@ Here are the capsule descriptions:
 The result at wevouchfor.campfirenow.com looks like this:
 </p>
 
-<img class="center" src="images/campfire.png" />
+<img class="center" src="images/campfire.png" alt="Screen shot showing
+testunit output at wevouchfor.campfirenow.com" />
 
 <p>
 The scandal is the first line of the message; the details are the rest.
@@ -57,7 +62,8 @@ To use the <code>campfire</code> crony, you must have a <a href="http://campfire
 Here is an example of a continuous build server telling jabber (and perhaps other cronies) about a broken build:
 </p>
 
-<img class="center" src="images/jabber-big.png" />
+<img class="center" src="images/jabber-big.png" alt="Screen shot of Jabber
+chat showing testunit output" />
 
 <p>
 The scandal is the first line of the message; the details are the rest.
@@ -85,7 +91,8 @@ the YAML to this:
 jabber-to: brianmarick@jabberplace.org
 </pre>
 
-<p>One the command line, multiple accounts are separated by commas, like this:
+<p>On the command line, multiple accounts are separated by commas, like
+this:</p>
 <pre>
  --jabber-to=fred@example.com,brianmarick@example.com 
 </pre>
@@ -113,7 +120,8 @@ the YAML to this:
     mail-to: marick@example.com
 </pre>
 
-<p>One the command line, multiple accounts are separated by commas, like this:
+<p>On the command line, multiple accounts are separated by commas, like
+this:</p>
 <pre>
     --mail-to=marick@example.com,person@example.com 
 </pre>
@@ -133,13 +141,15 @@ the YAML to this:
 The <code>trac</code> crony puts a notice in the <a href="http://trac.edgewall.org/" title="The Trac Project - Trac">Trac</a> timeline, where it looks like this:
 </p>
 
-<img class="center" src="images/trac-bigger.png" />
+<img class="center" src="images/trac-bigger.png" alt="Screen shot of Trac
+timeline showing notices: &quot;AnnouncingSuccessfulDeployment edited by trac&quot;" />
 
 <p>
 The mechanism is a hack. To do it right, you'd have to write a plugin and enable XMP/RPC and whatnot. So the implementation is to edit a Wiki page, turning the scandal into a header and putting the details below it. That looks like this:
 </p>
 
-<img class="center" src="images/trac-detail.png" />
+<img class="center" src="images/trac-detail.png" alt="Screen shot of Trac wiki
+page showing deployment announcements" />
 
 <p>
 Then, if the Trac timeline is set to display changes to Wiki pages (configurable per-user on the Timeline page), the changed page's title will appear in the Timeline. You have to click through to see the scandal and details.
@@ -165,7 +175,8 @@ To use this implementation, you have to set the following:
 <p>
 Because <a href="http://twitter.com/home" title="Twitter">Twitter</a> is meant for short messages, only the scandal is sent:
 </p>
-<img class="center" src="images/twitter.png" />
+<img class="center" src="images/twitter.png" alt="Screen shot of Twitter post:
+&quot;Build is BROKEN&quot;" />
 
 <p>
 To use the <code>twitter</code> crony, you need a Twitter account. Messages are sent to that account for others to view. The configuration options are:
